@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoverSpot - Editar Perfil</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="coverspot 3.png" alt="CoverSpot Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Página inicial</a></li>
+                <li><a href="#">Sobre nós</a></li>
+                <li><a href="#">Comunidade</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="perfil-info">
+                <img src="pessoa.PNG" alt="Foto de Luciano Almeida" class="perfil-foto">
+                <h2>Luciano Almeida</h2>
+                <p>@Luciano</p>
+                <button class="btn">Adicionar nova foto</button>
+                <p><strong>Atuação:</strong> Sertanejo</p>
+                <p><strong>Disponibilidade:</strong> 130h</p>
+                <div class="bio">
+                    <p>Com uma paixão por reviver grandes momentos da música, ele destaca a peça qualidade das performances ao vivo e pelo convívio direto com o público, sempre trazendo um toque pessoal a cada canção.</p>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <h1>Editar perfil</h1>
+            <form>
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" value="Luciano Almeida">
+                </div>
+                <div class="form-group">
+                    <label for="username">Nome de usuário:</label>
+                    <input type="text" id="username" value="Luciano" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" value="*******">
+                </div>
+                <div class="form-group">
+                    <label for="confirmar-senha">Confirmar Senha:</label>
+                    <input type="password" id="confirmar-senha" value="*******">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" value="luciano335@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="confirmar-email">Confirmar email:</label>
+                    <input type="email" id="confirmar-email" value="luciano@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="disponibilidade">Disponibilidade:</label>
+                    <input type="text" id="disponibilidade" value="130h">
+                </div>
+                <div class="form-group">
+                    <label for="area">Área de atuação:</label>
+                    <input type="text" id="area" value="Sertanejo" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="redes-sociais">Redes sociais:</label>
+                    <input type="text" id="redes-sociais" value="@luciano.couver2">
+                </div>
+                <button type="submit" class="btn-submit">Adicionar Informações</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
