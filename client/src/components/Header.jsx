@@ -1,21 +1,22 @@
 import styles from "../styles/Header.module.css"
+import logo from "../assets/coverspot 3.png"
 
 export default function Header() {
   return (
     <header className={styles.header}>
-      <div>
-        <img className={styles.logo} src="coverspot 3.png" alt="CoverSpot Logo" />
+      <div className="pr-6">
+        <img className={styles.logo} src={logo} alt="CoverSpot Logo" />
       </div>
       <nav>
-        <ul>
+        <ul className="flex gap-x-5 text-[#007bff] transition-all">
           <li>
-            <a href="#">Página inicial</a>
+            <a href="#" className="hover:text-[#0056b3] transition-all">Página inicial</a>
           </li>
           <li>
-            <a href="#">Sobre nós</a>
+            <a href="#" className="hover:text-[#0056b3] transition-all">Sobre nós</a>
           </li>
           <li>
-            <a href="#">Comunidade</a>
+            <a href="#" className="hover:text-[#0056b3] transition-all">Comunidade</a>
           </li>
         </ul>
       </nav>
