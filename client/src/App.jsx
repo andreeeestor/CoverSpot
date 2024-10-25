@@ -1,12 +1,16 @@
-import Header from './components/Header'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import SuportePage from "./pages/suporte"
+import HomePage from "./pages/home"
+import NotFoundPage from "./pages/notFound"
 
-function App() {
-
-  return (
-    <>
-      <Header />      
-    </>
-  )
+export default function App(){
+    return(
+        <BrowserRouter>
+            <Routes>
+                <Route path="*" element={<NotFoundPage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/suporte" element={<SuportePage />} />
+            </Routes>
+        </BrowserRouter>   
+    )
 }
-
-export default App

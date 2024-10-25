@@ -16,6 +16,7 @@ export default function SuportePage() {
           <div className="flex items-center bg-[#007bff] p-2">
             <button className="bg-white border-none p-2 rounded cursor-pointer">+</button>
             <input type="text" className="grow p-3 border-none rounded ml-3 mr-3" />
+            
             <button className="bg-white border-none p-2 rounded cursor-pointer">
               <img src="" alt="" />
             </button>
