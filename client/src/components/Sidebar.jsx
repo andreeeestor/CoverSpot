@@ -12,9 +12,8 @@ import {
   Question,
   UserCirclePlus,
 } from "@phosphor-icons/react";
-import { Tooltip } from "flowbite-react";
 
-const Sidebar = () => {
+const Sidebar = ({active}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -44,7 +43,7 @@ const Sidebar = () => {
         />
         <Option Icon={Headset} title="Suporte" open={open} link="/suporte" />
         <hr />
-        <Option Icon={UserCirclePlus} title="Autenticação" open={open} link="/autenticacao" />
+        <Option Icon={UserCirclePlus} title="Autenticação" open={open} link="/autenticacao" active={active} />
       </div>
 
       <ToggleClose open={open} setOpen={setOpen} />
@@ -52,7 +51,7 @@ const Sidebar = () => {
   );
 };
 
-const Option = ({ Icon, title, open, link }) => {
+const Option = ({ Icon, title, open, link, active }) => {
   const location = useLocation();
   const isActive = location.pathname === link;
 
@@ -60,7 +59,7 @@ const Option = ({ Icon, title, open, link }) => {
     <Link
       to={link}
       className={`relative flex h-10 w-full items-center rounded-md transition-colors ${
-        isActive
+        isActive || active
           ? "bg-sky-100 text-sky-800"
           : "text-slate-500 hover:bg-slate-100"
       }`}

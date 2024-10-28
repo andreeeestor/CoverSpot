@@ -4,6 +4,7 @@ import HomePage from "./pages/home"
 import NotFoundPage from "./pages/notFound"
 import FAQsPage from "./pages/faq"
 import AutenticacaoPage from "./pages/autenticacao"
+import CadastroCoverPage from "./pages/autenticacao/cadastroCover"
 
 export default function App(){
     return(
@@ -14,6 +15,7 @@ export default function App(){
                 <Route path="/faqs" element={<FAQsPage />} />
                 <Route path="/suporte" element={<SuportePage />} />
                 <Route path="/autenticacao" element={<AutenticacaoPage />} />
+                <Route path="/autenticacao/cadastrocover" element={<CadastroCoverPage />} />
                 {/* <Route path="/suporte/chatEstabelecimento" element={<SuportePage />} /> */}
             </Routes>
         </BrowserRouter>   
