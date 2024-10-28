@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
 
-import { House, MicrophoneStage } from "@phosphor-icons/react"
+import {
+  AddressBook,
+  Headset,
+  House,
+  MicrophoneStage,
+  UsersThree,
+  CaretDoubleRight,
+  Question,
+  UserCirclePlus,
+} from "@phosphor-icons/react";
+import { Tooltip } from "flowbite-react";
 
 const Sidebar = () => {
-  const [open, setOpen] = useState(true);
-  const [selected, setSelected] = useState("Dashboard");
+  const [open, setOpen] = useState(false);
 
   return (
     <motion.nav
       layout
-      className="sticky top-0 h-screen shrink-0 border-r border-slate-300 bg-white p-2"
+      className="fixed top-0 h-screen shrink-0 border-r border-slate-300 bg-white p-2 z-50"
       style={{
         width: open ? "225px" : "fit-content",
       }}
@@ -18,13 +28,23 @@ const Sidebar = () => {
       <TitleSection open={open} />
 
       <div className="space-y-1">
+        <Option Icon={House} title="Home" open={open} link="/" />
         <Option
-          Icon={House}
-          title="Dashboard"
-          selected={selected}
-          setSelected={setSelected}
+          Icon={AddressBook}
+          title="Sobre Nós"
           open={open}
+          link="/sobre"
         />
+        <Option Icon={Question} title="FAQs" open={open} link="/faqs" />
+        <Option
+          Icon={UsersThree}
+          title="Comunidade"
+          open={open}
+          link="/comunidade"
+        />
+        <Option Icon={Headset} title="Suporte" open={open} link="/suporte" />
+        <hr />
+        <Option Icon={UserCirclePlus} title="Autenticação" open={open} link="/autenticacao" />
       </div>
 
       <ToggleClose open={open} setOpen={setOpen} />
@@ -32,12 +52,18 @@ const Sidebar = () => {
   );
 };
 
-const Option = ({ Icon, title, selected, setSelected, open, notifs }) => {
+const Option = ({ Icon, title, open, link }) => {
+  const location = useLocation();
+  const isActive = location.pathname === link;
+
   return (
-    <motion.button
-      layout
-      onClick={() => setSelected(title)}
-      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${selected === title ? "bg-indigo-100 text-indigo-800" : "text-slate-500 hover:bg-slate-100"}`}
+    <Link
+      to={link}
+      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${
+        isActive
+          ? "bg-sky-100 text-sky-800"
+          : "text-slate-500 hover:bg-slate-100"
+      }`}
     >
       <motion.div
         layout
@@ -56,91 +82,64 @@ const Option = ({ Icon, title, selected, setSelected, open, notifs }) => {
           {title}
         </motion.span>
       )}
-
-      {notifs && open && (
-        <motion.span
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
-          style={{ y: "-50%" }}
-          transition={{ delay: 0.5 }}
-          className="absolute right-2 top-1/2 size-4 rounded bg-indigo-500 text-xs text-white"
-        >
-          {notifs}
-        </motion.span>
-      )}
-    </motion.button>
+    </Link>
   );
 };
 
-const TitleSection = ({ open }) => {
-  return (
-    <div className="mb-3 border-b border-slate-300 pb-3">
-      <div className="flex cursor-pointer items-center justify-between rounded-md transition-colors hover:bg-slate-100">
-        <div className="flex items-center gap-2">
-          <Logo />
-          {open && (
-            <motion.div
-              layout
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.125 }}
-            >
-              <span className="block text-xs font-semibold">TomIsLoading</span>
-              <span className="block text-xs text-slate-500">Pro Plan</span>
-            </motion.div>
-          )}
-        </div>
-        {/* {open && <FiChevronDown className="mr-2" />} */}
-      </div>
-    </div>
-  );
-};
-
-const Logo = () => {
-  // Temp logo from https://logoipsum.com/
-  return (
-    <motion.div
-      layout
-      className="grid size-10 shrink-0 place-content-center rounded-md bg-indigo-600"
-    >
-      <MicrophoneStage />
-    </motion.div>
-  );
-};
-
-const ToggleClose = ({ open, setOpen }) => {
-  return (
-    <motion.button
-      layout
-      onClick={() => setOpen((pv) => !pv)}
-      className="absolute bottom-0 left-0 right-0 border-t border-slate-300 transition-colors hover:bg-slate-100"
-    >
-      <div className="flex items-center p-2">
-        <motion.div
-          layout
-          className="grid size-10 place-content-center text-lg"
-        >
-          {/* <FiChevronsRight
-            className={`transition-transform ${open && "rotate-180"}`}
-          /> */}
-        </motion.div>
+const TitleSection = ({ open }) => (
+  <div className="mb-3 border-b border-slate-300 pb-3">
+    <div className="flex cursor-pointer items-center justify-between rounded-md transition-colors hover:bg-slate-100">
+      <div className="flex items-center gap-2">
+        <Logo />
         {open && (
-          <motion.span
+          <motion.div
             layout
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.125 }}
-            className="text-xs font-medium"
           >
-            Hide
-          </motion.span>
+            <span className="block font-semibold">CoverSpot</span>
+          </motion.div>
         )}
       </div>
-    </motion.button>
-  );
-};
+    </div>
+  </div>
+);
 
-export default Sidebar
+const Logo = () => (
+  <motion.div
+    layout
+    className="grid size-10 shrink-0 place-content-center rounded-md bg-[#007bff]"
+  >
+    <MicrophoneStage color="white" weight="bold" />
+  </motion.div>
+);
+
+const ToggleClose = ({ open, setOpen }) => (
+  <motion.button
+    layout
+    onClick={() => setOpen((prev) => !prev)}
+    className="absolute bottom-0 left-0 right-0 border-t border-slate-300 transition-colors hover:bg-slate-100"
+  >
+    <div className="flex items-center p-2">
+      <motion.div layout className="grid size-10 place-content-center text-lg">
+        <CaretDoubleRight
+          className={`transition-transform ${open && "rotate-180"}`}
+        />
+      </motion.div>
+      {open && (
+        <motion.span
+          layout
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.125 }}
+          className="text-xs font-medium"
+        >
+          Fechar
+        </motion.span>
+      )}
+    </div>
+  </motion.button>
+);
+
+export default Sidebar;
