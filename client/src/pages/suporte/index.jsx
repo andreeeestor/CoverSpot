@@ -14,9 +14,9 @@ export default function SuportePage() {
   return (
     <>
       <Sidebar />
-      <MainContainer className={"h-screen"}>
+      <MainContainer>
         {/* <main className="grid place-items-center h-screen"> */}
-        <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-lg">
             <h1 className="text-center text-2xl font-bold sm:text-3xl">
               Central de Ajuda
@@ -59,7 +59,7 @@ export default function SuportePage() {
         {/* </main> */}
 
         <section className="text-gray-600 body-font">
-          <div className="container px-5 py-24 mx-auto">
+          <div className="container px-5 pb-24 pt-4 mx-auto">
             <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
               <div className="p-4 md:w-1/3 flex flex-col text-center items-center">
                 <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-blue-100 mb-5 flex-shrink-0">
