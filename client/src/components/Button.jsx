@@ -1,8 +1,8 @@
-export default function Button({text, icon}) {
+export default function Button({text, icon, className}) {
   return (
     <button
       type="submit"
-      className='
+      className={`
         relative z-0 flex items-center gap-2 overflow-hidden rounded-lg border-[1px] 
         border-[#18A0FB] px-4 py-2 font-semibold
         uppercase text-[#18A0FB] transition-all duration-500
@@ -14,10 +14,10 @@ export default function Button({text, icon}) {
         before:transition-transform before:duration-1000
         before:content-[""]
 
-        hover:scale-105 hover:text-neutral-900
+        hover:scale-105 hover:text-white
         hover:before:translate-x-[0%]
         hover:before:translate-y-[0%]
-        active:scale-95'
+        active:scale-95 ${className}`}
     >
       {icon}
       <span>{text}</span>

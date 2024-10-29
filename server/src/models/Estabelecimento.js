@@ -1,56 +1,18 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/config.js';
+import sequelize from "../config/db.js";
 
 const Estabelecimento = sequelize.define('Estabelecimento', {
-  id: {
-    type: DataTypes.INTEGER.UNSIGNED,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  nome: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  cnpj: {
-    type: DataTypes.STRING(18),
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  telefone: {
-    type: DataTypes.STRING(15),
-    allowNull: false,
-  },
-  senha: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  endereco: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  tipoEndereco: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  descricao: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  horarioFuncionamento: {
-    type: DataTypes.TIME,
-    allowNull: false,
-  },
-  capacidade: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  preferenciaMusical: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
+  nome: DataTypes.STRING,
+  cnpj: DataTypes.STRING,
+  email: DataTypes.STRING,
+  telefone: DataTypes.STRING,
+  senha: DataTypes.STRING,
+  endereco: DataTypes.STRING,
+  tipoEndereco: DataTypes.STRING,
+  descricao: DataTypes.TEXT,
+  horarioFuncionamento: DataTypes.STRING,
+  capacidade: DataTypes.INTEGER,
+  preferenciaMusical: DataTypes.STRING,
 });
 
 export default Estabelecimento;

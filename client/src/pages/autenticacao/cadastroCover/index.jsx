@@ -1,9 +1,52 @@
+import { useState } from "react";
 import { MicrophoneStage } from "@phosphor-icons/react";
 import Sidebar from "../../../components/Sidebar";
 import { InputBase, InputPassword } from "../../../components/Inputs";
 import ImageLogin from "../../../assets/Cover.jpg";
 
 export default function CadastroCoverPage() {
+  const [formData, setFormData] = useState({
+    nomeCover: "",
+    nome: "",
+    email: "",
+    telefone: "",
+    senha: "",
+    generoMusical: "",
+    biografia: "",
+    portfolio: "",
+    disponibilidade: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3000/cover", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("Cadastro realizado com sucesso!");
+        console.log(response)
+      } else {
+        const errorData = await response.json();
+        alert(`Erro: ${errorData.error}`);
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar:", error);
+      alert("Erro ao conectar com o servidor.");
+    }
+  };
+
   return (
     <>
       <Sidebar active />
@@ -31,47 +74,94 @@ export default function CadastroCoverPage() {
                 artístico na CoverSpot:
               </p>
 
-              <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+              <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-6 gap-6">
                 <div className="col-span-6 sm:col-span-3">
-                  <InputBase label={"Nome"} type={"text"} />
+                  <InputBase 
+                    label="Nome" 
+                    type="text" 
+                    name="nomeCover" 
+                    value={formData.nomeCover} 
+                    onChange={handleChange} 
+                  />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
-                  <InputBase label={"Sobrenome"} type={"text"} />
+                  <InputBase 
+                    label="Sobrenome" 
+                    type="text" 
+                    name="nome" 
+                    value={formData.nome} 
+                    onChange={handleChange} 
+                  />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
-                  <InputBase label={"Email"} type={"email"} />
+                  <InputBase 
+                    label="Email" 
+                    type="email" 
+                    name="email" 
+                    value={formData.email} 
+                    onChange={handleChange} 
+                  />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
-                  <InputBase label={"Celular"} type={"number"} />
+                  <InputBase 
+                    label="Celular" 
+                    type="number" 
+                    name="telefone" 
+                    value={formData.telefone} 
+                    onChange={handleChange} 
+                  />
                 </div>
 
                 <div className="col-span-6 relative">
-                  <InputPassword label={"Senha"} />
+                  <InputPassword 
+                    label="Senha" 
+                    name="senha" 
+                    value={formData.senha} 
+                    onChange={handleChange} 
+                  />
                 </div>
 
                 <div className="col-span-6">
-                  <InputBase label={"Gênero Musical"} type={"text"} />
+                  <InputBase 
+                    label="Gênero Musical" 
+                    type="text" 
+                    name="generoMusical" 
+                    value={formData.generoMusical} 
+                    onChange={handleChange} 
+                  />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
-                  <div className="col-span-6 relative">
-                    <InputBase label={"Biografia"} type={"text"} />
-                  </div>
+                  <InputBase 
+                    label="Biografia" 
+                    type="text" 
+                    name="biografia" 
+                    value={formData.biografia} 
+                    onChange={handleChange} 
+                  />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
-                  <InputBase label={"Portfolio"} type={"text"} />
+                  <InputBase 
+                    label="Portfolio" 
+                    type="text" 
+                    name="portfolio" 
+                    value={formData.portfolio} 
+                    onChange={handleChange} 
+                  />
                 </div>
 
-                <div className="col-span-6 relative">
-                  <InputBase label={"Disponibilidade"} type={"text"} />
-                </div>
-
-                <div className="col-span-6 relative">
-                  <InputBase label={"Área de atuação"} type={"text"} />
+                <div className="col-span-6">
+                  <InputBase 
+                    label="Disponibilidade" 
+                    type="text" 
+                    name="disponibilidade" 
+                    value={formData.disponibilidade} 
+                    onChange={handleChange} 
+                  />
                 </div>
 
                 <div className="col-span-6 sm:flex sm:items-center sm:gap-4">

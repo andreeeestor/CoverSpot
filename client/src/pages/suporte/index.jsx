@@ -16,24 +16,46 @@ export default function SuportePage() {
       <Sidebar />
       <MainContainer className={"h-screen"}>
         {/* <main className="grid place-items-center h-screen"> */}
-        <section className="text-center space-y-5">
-          <h1 className="text-4xl">Central de ajuda</h1>
-          <h3 className="text-2xl font-medium">Como podemos te ajudar?</h3>
-        </section>
-        <form className="flex flex-col items-center">
-          <FloatingLabel
-            variant="filled"
-            className="w-full"
-            label="Digite aqui o que você procura:"
-            required
-          />
-          <FloatingLabel
-            variant="filled"
-            label="E-mail ou nome de usuário"
-            required
-          />
-          <Button text={"Enviar"} icon={<PaperPlaneTilt weight="fill" />} />
-        </form>
+        <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-lg">
+            <h1 className="text-center text-2xl font-bold sm:text-3xl">
+              Central de Ajuda
+            </h1>
+
+            <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
+              Como podemos ajudar?
+            </p>
+
+            <form
+              className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+            >
+
+              <div>
+                <div className="relative">
+                  <input
+                    type="text"
+                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:border-[#18A0FB]"
+                    placeholder="Digite aqui o que você procura:"
+                  />
+
+                </div>
+              </div>
+
+              <div>
+                <div className="relative">
+                  <input
+                    type="text"
+                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:border-[#18A0FB]"
+                    placeholder="E-mail ou nome de usuário:"
+                  />
+
+                </div>
+              </div>
+
+              <Button icon={<PaperPlaneTilt weight="fill" />} text={"ENVIAR"} className={"w-full text-center flex items-center justify-center"} />
+            </form>
+          </div>
+        </div>
         {/* </main> */}
 
         <section className="text-gray-600 body-font">
