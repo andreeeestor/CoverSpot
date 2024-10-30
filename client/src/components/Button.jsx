@@ -1,4 +1,4 @@
-export default function Button({text, icon, className}) {
+export default function Button({text, icon, className, onClick}) {
   return (
     <button
       type="submit"
@@ -18,6 +18,7 @@ export default function Button({text, icon, className}) {
         hover:before:translate-x-[0%]
         hover:before:translate-y-[0%]
         active:scale-95 ${className}`}
+        onClick={onClick}
     >
       {icon}
       <span>{text}</span>

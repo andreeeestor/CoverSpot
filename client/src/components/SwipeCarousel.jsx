@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
 
 const imgs = [
-  "../../public/img/img01.png",
+  // "../../public/img/img01.png",
   "../../public/img/img02.png",
   "../../public/img/img03.png",
   "../../public/img/img04.png",
@@ -52,7 +52,7 @@ export const SwipeCarousel = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-slate-950 pb-8  ">
+    <div className="relative overflow-hidden bg-gray-50 pb-8  ">
       <motion.div
         drag="x"
         dragConstraints={{
@@ -111,7 +111,7 @@ const Dots = ({ imgIndex, setImgIndex }) => {
             key={idx}
             onClick={() => setImgIndex(idx)}
             className={`h-3 w-3 rounded-full transition-colors ${
-              idx === imgIndex ? "bg-neutral-50" : "bg-neutral-500"
+              idx === imgIndex ? "bg-neutral-200" : "bg-slate-500"
             }`}
           />
         );
