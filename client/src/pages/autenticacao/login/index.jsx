@@ -1,16 +1,53 @@
-import Sidebar from "../../../components/Sidebar"
-import { InputBase, InputPassword } from "../../../components/Inputs"
-import ImageLogin from "../../../assets/Cover.jpg"
-import { MicrophoneStage } from "@phosphor-icons/react/dist/ssr"
+import Sidebar from "../../../components/Sidebar";
+import { InputBase, InputPassword } from "../../../components/Inputs";
+import ImageLogin from "../../../assets/Cover.jpg";
+import { MicrophoneStage } from "@phosphor-icons/react/dist/ssr";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Toaster, toast } from "sonner";
 
-export default function LoginPage(){
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [error, setError] = useState("");
 
-    function handleSubmit() {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/bandas/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, senha }),
+      });
 
+      if (response.ok) {
+        toast.success("Login bem-sucedido!");
+      } else {
+        toast.error("Credenciais inválidas");
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+      toast.error("Credenciais inválidas");
     }
+  }
 
-    return(
-        <>
+  return (
+    <>
+      <Toaster
+        expand
+        position="top-center"
+        richColors
+        toastOptions={{
+          style: {
+            margin: "10px",
+            padding: "15px",
+            maxWidth: "400px",
+            borderRadius: "8px",
+            gap: "10px",
+            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+          },
+        }}
+      />
       <Sidebar active />
       <section className="bg-white pl-10">
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -35,32 +72,37 @@ export default function LoginPage(){
                 Bem-vindo de volta à CoverSpot!
               </p>
 
-              <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-6 gap-6">
+              <form
+                onSubmit={handleSubmit}
+                className="mt-8 grid grid-cols-6 gap-6"
+              >
                 <div className="col-span-6">
-                  <InputBase 
-                    label="Email" 
-                    type="email" 
-                    name="email" 
-                    // value={formData.email} 
-                    // onChange={handleChange} 
+                  <InputBase
+                    label="Email"
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
 
                 <div className="col-span-6 relative">
-                  <InputPassword 
-                    label="Senha" 
-                    name="senha" 
-                    // value={formData.senha} 
-                    // onChange={handleChange} 
+                  <InputPassword
+                    label="Senha"
+                    name="senha"
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
                   />
                 </div>
 
                 <div className="col-span-6">
-            <p className="text-sm text-gray-500">
-              Esqueceu sua senha?
-              <a href="#" className="text-gray-700 underline ml-2">Clique para redefinir</a>
-            </p>
-          </div>
+                  <p className="text-sm text-gray-500">
+                    Esqueceu sua senha?
+                    <a href="#" className="text-gray-700 underline ml-2">
+                      Clique para redefinir
+                    </a>
+                  </p>
+                </div>
 
                 <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                   <button
@@ -72,9 +114,12 @@ export default function LoginPage(){
 
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     Ainda não tem uma conta?
-                    <a href="#" className="text-gray-700 underline pl-2">
+                    <Link
+                      to="/autenticacao/cadastrocover"
+                      className="text-gray-700 underline pl-2"
+                    >
                       Cadastre-se
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>
@@ -84,5 +129,5 @@ export default function LoginPage(){
         </div>
       </section>
     </>
-    )
+  );
 }

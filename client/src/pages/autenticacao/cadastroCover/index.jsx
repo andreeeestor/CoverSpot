@@ -3,6 +3,7 @@ import { MicrophoneStage } from "@phosphor-icons/react";
 import Sidebar from "../../../components/Sidebar";
 import { InputBase, InputPassword } from "../../../components/Inputs";
 import ImageLogin from "../../../assets/Cover.jpg";
+import { Link } from "react-router-dom";
 
 export default function CadastroCoverPage() {
   const [formData, setFormData] = useState({
@@ -174,9 +175,9 @@ export default function CadastroCoverPage() {
 
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     Já tem uma conta?
-                    <a href="#" className="text-gray-700 underline pl-2">
+                    <Link to="/autenticacao/login" className="text-gray-700 underline pl-2">
                       Faça o Login
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>
