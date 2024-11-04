@@ -55,7 +55,7 @@ export default function AutenticacaoPage() {
             </p>
 
             <Link
-              to="/autenticacao/"
+              to="/autenticacao/cadastroestabelecimento"
               className="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600"
             >
               Registrar como Estabelecimento

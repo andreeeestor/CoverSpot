@@ -2,60 +2,61 @@ import { useState } from "react";
 import { MicrophoneStage } from "@phosphor-icons/react";
 import Sidebar from "../../../components/Sidebar";
 import { InputBase, InputPassword } from "../../../components/Inputs";
-import ImageLogin from "../../../assets/Cover.jpg";
+import ImageLogin from "../../../assets/Estabelecimento.jpg";
 import { Link } from "react-router-dom";
 import loadingsvg from "../../../assets/LoadingSVG.svg";
 import { Toaster, toast } from "sonner";
 
-export default function CadastroCoverPage() {
-  const [formData, setFormData] = useState({
-    nomeCover: "",
-    nome: "",
-    email: "",
-    telefone: "",
-    senha: "",
-    generoMusical: "",
-    biografia: "",
-    portfolio: "",
-    disponibilidade: "",
-  });
-  const [loading, setLoading] = useState(false);
+export default function CadastroEstabelecimentoPage(){
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await fetch("http://localhost:3000/cover", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+    const [formData, setFormData] = useState({
+        nomeCover: "",
+        nome: "",
+        email: "",
+        telefone: "",
+        senha: "",
+        generoMusical: "",
+        biografia: "",
+        portfolio: "",
+        disponibilidade: "",
       });
+      const [loading, setLoading] = useState(false);
+    
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+      };
+    
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+          const response = await fetch("http://localhost:3000/cover", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+    
+          if (response.ok) {
+            toast.success("Cadastro realizado com sucesso!");
+            console.log(response);
+            setLoading(false);
+          } else {
+            const errorData = await response.json();
+            toast.error(`Erro: ${errorData.error}`);
+            setLoading(false);
+          }
+        } catch (error) {
+          console.error("Erro ao cadastrar:", error);
+          toast.error("Erro ao conectar com o servidor.");
+          setLoading(false);
+        }
+      };
 
-      if (response.ok) {
-        toast.success("Cadastro realizado com sucesso!");
-        console.log(response);
-        setLoading(false);
-      } else {
-        const errorData = await response.json();
-        toast.error(`Erro: ${errorData.error}`);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error("Erro ao cadastrar:", error);
-      toast.error("Erro ao conectar com o servidor.");
-      setLoading(false);
-    }
-  };
-
-  return (
-    <>
+    return(
+        <>
     <Toaster
         expand
         position="top-center"
@@ -92,8 +93,7 @@ export default function CadastroCoverPage() {
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Preencha o formulário abaixo para criar sua conta como Cover
-                artístico na CoverSpot:
+                Preencha o formulário abaixo para criar sua conta do seu estabelecimento na CoverSpot:
               </p>
 
               <form
@@ -214,5 +214,5 @@ export default function CadastroCoverPage() {
         </div>
       </section>
     </>
-  );
+    )
 }

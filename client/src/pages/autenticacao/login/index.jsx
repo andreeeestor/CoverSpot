@@ -1,18 +1,21 @@
 import Sidebar from "../../../components/Sidebar";
 import { InputBase, InputPassword } from "../../../components/Inputs";
-import ImageLogin from "../../../assets/Cover.jpg";
+import ImageLogin from "../../../assets/img01.png";
 import { MicrophoneStage } from "@phosphor-icons/react/dist/ssr";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
+import loadingsvg from "../../../assets/LoadingSVG.svg";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setLoading(true)
     try {
       const response = await fetch("http://localhost:3000/bandas/login", {
         method: "POST",
@@ -22,12 +25,15 @@ export default function LoginPage() {
 
       if (response.ok) {
         toast.success("Login bem-sucedido!");
+        setLoading(false)
       } else {
         toast.error("Credenciais inválidas");
+        setLoading(false)
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
-      toast.error("Credenciais inválidas");
+      toast.error("Erro ao conectar com o servidor.");
+      setLoading(false)
     }
   }
 
@@ -109,7 +115,7 @@ export default function LoginPage() {
                     type="submit"
                     className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
                   >
-                    Entrar
+                    {loading ? <img src={loadingsvg} /> : "Entrar"}
                   </button>
 
                   <p className="mt-4 text-sm text-gray-500 sm:mt-0">
