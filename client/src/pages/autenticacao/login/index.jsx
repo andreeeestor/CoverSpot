@@ -6,12 +6,20 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import loadingsvg from "../../../assets/LoadingSVG.svg";
+import {Modal} from "flowbite-react"
+import Button from "../../../components/Button"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(true)
+
+  function onCloseModal() {
+    setOpenModal(false);
+    setEmail('');
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -39,6 +47,14 @@ export default function LoginPage() {
 
   return (
     <>
+    <Modal show={openModal} size="md" onClose={onCloseModal} popup>
+    <Modal.Header>Redefinição de senha</Modal.Header >
+    <Modal.Body className="space-y-6">
+      <h6 className="font-medium text-gray-400">Informe seu email registrado que te enviaremos um link para recuperação da senha</h6>
+      <InputBase type={"email"} />
+      <Button className={"w-full flex justify-center"} text={"ENVIAR"} />
+    </Modal.Body>
+    </Modal>
       <Toaster
         expand
         position="top-center"

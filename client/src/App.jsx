@@ -7,6 +7,7 @@ import AutenticacaoPage from "./pages/autenticacao"
 import CadastroCoverPage from "./pages/autenticacao/cadastroCover"
 import LoginPage from "./pages/autenticacao/login"
 import CadastroEstabelecimentoPage from "./pages/autenticacao/cadastroEstabelecimento"
+import DestaquePage from "./pages/destaque"
 
 export default function App(){
     return(
@@ -16,6 +17,7 @@ export default function App(){
                 <Route path="/" element={<HomePage />} />
                 <Route path="/faqs" element={<FAQsPage />} />
                 <Route path="/suporte" element={<SuportePage />} />
+                <Route path="/destaque" element={<DestaquePage />} />
                 <Route path="/autenticacao" element={<AutenticacaoPage />} />
                 <Route path="/autenticacao/login" element={<LoginPage />} />
                 <Route path="/autenticacao/cadastrocover" element={<CadastroCoverPage />} />
