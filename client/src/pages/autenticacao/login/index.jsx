@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import loadingsvg from "../../../assets/LoadingSVG.svg";
-import {Modal} from "flowbite-react"
+import {HR, Modal} from "flowbite-react"
 import Button from "../../../components/Button"
+import { PaperPlaneTilt } from "@phosphor-icons/react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -48,11 +49,11 @@ export default function LoginPage() {
   return (
     <>
     <Modal show={openModal} size="md" onClose={onCloseModal} popup>
-    <Modal.Header>Redefinição de senha</Modal.Header >
-    <Modal.Body className="space-y-6">
-      <h6 className="font-medium text-gray-400">Informe seu email registrado que te enviaremos um link para recuperação da senha</h6>
-      <InputBase type={"email"} />
-      <Button className={"w-full flex justify-center"} text={"ENVIAR"} />
+    <Modal.Header className="px-6 pt-6 text-pretty font-semibold tracking-tight text-gray-900 lg:text-balance">Redefinição de senha</Modal.Header >
+    <div className="w-5/6 h-px " />
+    <Modal.Body className="space-y-6 pt-3">
+      <InputBase type={"email"} label={"Informe seu EMAIL registrado que te enviaremos um link para recuperação da senha: "} />
+      <Button className={"w-full flex justify-center"} text={"ENVIAR"} icon={<PaperPlaneTilt weight="fill" />} />
     </Modal.Body>
     </Modal>
       <Toaster
@@ -120,9 +121,9 @@ export default function LoginPage() {
                 <div className="col-span-6">
                   <p className="text-sm text-gray-500">
                     Esqueceu sua senha?
-                    <a href="#" className="text-gray-700 underline ml-2">
+                    <span onClick={() => setOpenModal(true)} className="text-gray-700 underline ml-2 cursor-pointer">
                       Clique para redefinir
-                    </a>
+                    </span>
                   </p>
                 </div>
 
