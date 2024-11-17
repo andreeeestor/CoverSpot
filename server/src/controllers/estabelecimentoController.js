@@ -1,15 +1,113 @@
 import Estabelecimento from '../models/Estabelecimento.js';
 
-export const listarEstabelecimentos = async (req, res) => {
-  const estabelecimentos = await Estabelecimento.findAll();
-  res.status(200).json(estabelecimentos);
-};
+import bcrypt from 'bcrypt';
 
-export const criarEstabelecimento = async (req, res) => {
-  try {
-    const estabelecimento = await Estabelecimento.create(req.body);
-    res.status(201).json(estabelecimento);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+export const EstabelecimentoController = {
+  // Criar novo estabelecimento
+  async create(req, res) {
+    try {
+      const {
+        nome,
+        cnpj,
+        email,
+        telefone,
+        senha,
+        endereco,
+        tipoEndereco,
+        descricao,
+        horarioFuncionamento,
+        capacidade,
+        preferenciaMusical
+      } = req.body;
+
+      const estabelecimentoExistente = await Estabelecimento.findOne({ where: { cnpj } });
+      if (estabelecimentoExistente) {
+        return res.status(400).json({ error: 'CNPJ já cadastrado' });
+      }
+
+      const hashedSenha = await bcrypt.hash(senha, 10);
+
+      const estabelecimento = await Estabelecimento.create({
+        nome,
+        cnpj,
+        email,
+        telefone,
+        senha: hashedSenha,
+        endereco,
+        tipoEndereco,
+        descricao,
+        horarioFuncionamento,
+        capacidade,
+        preferenciaMusical
+      });
+
+      const { senha: _, ...estabelecimentoSemSenha } = estabelecimento.toJSON();
+      res.status(201).json(estabelecimentoSemSenha);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao criar estabelecimento' });
+    }
+  },
+
+  // Listar todos os estabelecimentos
+  async index(req, res) {
+    try {
+      const estabelecimentos = await Estabelecimento.findAll({
+        attributes: { exclude: ['senha'] }
+      });
+      res.json(estabelecimentos);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao listar estabelecimentos' });
+    }
+  },
+
+  // Buscar estabelecimento por ID
+  async show(req, res) {
+    try {
+      const estabelecimento = await Estabelecimento.findByPk(req.params.id, {
+        attributes: { exclude: ['senha'] }
+      });
+      if (!estabelecimento) {
+        return res.status(404).json({ error: 'Estabelecimento não encontrado' });
+      }
+      res.json(estabelecimento);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao buscar estabelecimento' });
+    }
+  },
+
+  // Atualizar estabelecimento
+  async update(req, res) {
+    try {
+      const estabelecimento = await Estabelecimento.findByPk(req.params.id);
+      if (!estabelecimento) {
+        return res.status(404).json({ error: 'Estabelecimento não encontrado' });
+      }
+
+      if (req.body.senha) {
+        req.body.senha = await bcrypt.hash(req.body.senha, 10);
+      }
+
+      await estabelecimento.update(req.body);
+      
+      const { senha: _, ...estabelecimentoAtualizado } = estabelecimento.toJSON();
+      res.json(estabelecimentoAtualizado);
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao atualizar estabelecimento' });
+    }
+  },
+
+  // Deletar estabelecimento
+  async delete(req, res) {
+    try {
+      const estabelecimento = await Estabelecimento.findByPk(req.params.id);
+      if (!estabelecimento) {
+        return res.status(404).json({ error: 'Estabelecimento não encontrado' });
+      }
+
+      await estabelecimento.destroy();
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao deletar estabelecimento' });
+    }
   }
 };

@@ -2,60 +2,83 @@ import Sidebar from "../../../components/Sidebar";
 import { InputBase, InputPassword } from "../../../components/Inputs";
 import ImageLogin from "../../../assets/img01.png";
 import { MicrophoneStage } from "@phosphor-icons/react/dist/ssr";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import loadingsvg from "../../../assets/LoadingSVG.svg";
-import {HR, Modal} from "flowbite-react"
-import Button from "../../../components/Button"
+import { HR, Modal } from "flowbite-react";
+import Button from "../../../components/Button";
 import { PaperPlaneTilt } from "@phosphor-icons/react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [openModal, setOpenModal] = useState(true)
+  const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
 
   function onCloseModal() {
     setOpenModal(false);
-    setEmail('');
+    setEmail("");
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setLoading(true)
+    setLoading(true);
+
     try {
-      const response = await fetch("http://localhost:3000/bandas/login", {
+      const response = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        toast.success("Login bem-sucedido!");
-        setLoading(false)
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userType", data.tipo);
+
+        toast.success("Login realizado com sucesso!");
+
+        if (data.tipo === "estabelecimento") {
+          navigate("/dashboard-estabelecimento");
+        } else {
+          navigate("/dashboard-banda");
+        }
       } else {
-        toast.error("Credenciais inválidas");
-        setLoading(false)
+        toast.error(data.error || "Credenciais inválidas");
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
       toast.error("Erro ao conectar com o servidor.");
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <>
-    <Modal show={openModal} size="md" onClose={onCloseModal} popup>
-    <Modal.Header className="px-6 pt-6 text-pretty font-semibold tracking-tight text-gray-900 lg:text-balance">Redefinição de senha</Modal.Header >
-    <div className="w-5/6 h-px " />
-    <Modal.Body className="space-y-6 pt-3">
-      <InputBase type={"email"} label={"Informe seu EMAIL registrado que te enviaremos um link para recuperação da senha: "} />
-      <Button className={"w-full flex justify-center"} text={"ENVIAR"} icon={<PaperPlaneTilt weight="fill" />} />
-    </Modal.Body>
-    </Modal>
+      <Modal show={openModal} size="md" onClose={onCloseModal} popup>
+        <Modal.Header className="px-6 pt-6 text-pretty font-semibold tracking-tight text-gray-900 lg:text-balance">
+          Redefinição de senha
+        </Modal.Header>
+        <div className="w-5/6 h-px " />
+        <Modal.Body className="space-y-6 pt-3">
+          <InputBase
+            type={"email"}
+            label={
+              "Informe seu EMAIL registrado que te enviaremos um link para recuperação da senha: "
+            }
+          />
+          <Button
+            className={"w-full flex justify-center"}
+            text={"ENVIAR"}
+            icon={<PaperPlaneTilt weight="fill" />}
+          />
+        </Modal.Body>
+      </Modal>
       <Toaster
         expand
         position="top-center"
@@ -121,7 +144,10 @@ export default function LoginPage() {
                 <div className="col-span-6">
                   <p className="text-sm text-gray-500">
                     Esqueceu sua senha?
-                    <span onClick={() => setOpenModal(true)} className="text-gray-700 underline ml-2 cursor-pointer">
+                    <span
+                      onClick={() => setOpenModal(true)}
+                      className="text-gray-700 underline ml-2 cursor-pointer"
+                    >
                       Clique para redefinir
                     </span>
                   </p>

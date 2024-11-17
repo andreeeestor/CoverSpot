@@ -1,22 +1,29 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import sequelize from './config/db.js';
-import bandaRoutes from './routes/bandaRoutes.js';
-import estabelecimentoRoutes from './routes/estabelecimentoRoutes.js';
+import estabelecimentoRoutes from "./routes/estabelecimentoRoutes.js"
+import bandaCoverRoutes from "./routes/bandaRoutes.js"
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
-const PORT = 3000;
 
-app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
 
-app.use('/bandas', bandaRoutes);
-app.use('/estabelecimentos', estabelecimentoRoutes);
+app.use('/api', estabelecimentoRoutes);
+app.use('/api', bandaCoverRoutes);
+app.use('/api/auth', authRoutes);
 
-sequelize.sync().then(() => {
-  console.log('Database synchronized');
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+sequelize.sync({ alter: true })
+  .then(() => {
+    console.log('Banco de dados sincronizado');
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Erro ao sincronizar banco de dados:', error);
   });
-});
+
+export default app;

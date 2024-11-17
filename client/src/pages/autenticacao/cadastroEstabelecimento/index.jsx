@@ -7,57 +7,61 @@ import { Link } from "react-router-dom";
 import loadingsvg from "../../../assets/LoadingSVG.svg";
 import { Toaster, toast } from "sonner";
 
-export default function CadastroEstabelecimentoPage(){
+export default function CadastroEstabelecimentoPage() {
+  const [formData, setFormData] = useState({
+    nome: "",
+    cnpj: "",
+    email: "",
+    telefone: "",
+    senha: "",
+    endereco: "",
+    tipoEndereco: "",
+    descricao: "",
+    horarioFuncionamento: "",
+    capacidade: "",
+    preferenciaMusical: "",
+  });
+  const [loading, setLoading] = useState(false);
 
-    const [formData, setFormData] = useState({
-        nomeCover: "",
-        nome: "",
-        email: "",
-        telefone: "",
-        senha: "",
-        generoMusical: "",
-        biografia: "",
-        portfolio: "",
-        disponibilidade: "",
-      });
-      const [loading, setLoading] = useState(false);
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-      };
-    
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        try {
-          const response = await fetch("http://localhost:3000/cover", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
-    
-          if (response.ok) {
-            toast.success("Cadastro realizado com sucesso!");
-            console.log(response);
-            setLoading(false);
-          } else {
-            const errorData = await response.json();
-            toast.error(`Erro: ${errorData.error}`);
-            setLoading(false);
-          }
-        } catch (error) {
-          console.error("Erro ao cadastrar:", error);
-          toast.error("Erro ao conectar com o servidor.");
-          setLoading(false);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/estabelecimentos",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         }
-      };
+      );
 
-    return(
-        <>
-    <Toaster
+      if (response.ok) {
+        toast.success("Cadastro realizado com sucesso!");
+        console.log(response);
+        setLoading(false);
+      } else {
+        const errorData = await response.json();
+        toast.error(`Erro: ${errorData.error}`);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar:", error);
+      toast.error("Erro ao conectar com o servidor.");
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <Toaster
         expand
         position="top-center"
         richColors
@@ -93,29 +97,30 @@ export default function CadastroEstabelecimentoPage(){
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Preencha o formulário abaixo para criar sua conta do seu estabelecimento na CoverSpot:
+                Preencha o formulário abaixo para criar sua conta do seu
+                estabelecimento na CoverSpot:
               </p>
 
               <form
                 onSubmit={handleSubmit}
                 className="mt-8 grid grid-cols-6 gap-6"
               >
-                <div className="col-span-6 sm:col-span-3">
+                <div className="col-span-6">
                   <InputBase
-                    label="Nome"
+                    label="Nome do Estabelecimento"
                     type="text"
-                    name="nomeCover"
-                    value={formData.nomeCover}
+                    name="nome"
+                    value={formData.nome}
                     onChange={handleChange}
                   />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
                   <InputBase
-                    label="Sobrenome"
+                    label="CNPJ"
                     type="text"
-                    name="nome"
-                    value={formData.nome}
+                    name="cnpj"
+                    value={formData.cnpj}
                     onChange={handleChange}
                   />
                 </div>
@@ -132,15 +137,15 @@ export default function CadastroEstabelecimentoPage(){
 
                 <div className="col-span-6 sm:col-span-3">
                   <InputBase
-                    label="Celular"
-                    type="number"
+                    label="Telefone"
+                    type="text"
                     name="telefone"
                     value={formData.telefone}
                     onChange={handleChange}
                   />
                 </div>
 
-                <div className="col-span-6 relative">
+                <div className="col-span-6 sm:col-span-3">
                   <InputPassword
                     label="Senha"
                     name="senha"
@@ -151,40 +156,60 @@ export default function CadastroEstabelecimentoPage(){
 
                 <div className="col-span-6">
                   <InputBase
-                    label="Gênero Musical"
+                    label="Endereço"
                     type="text"
-                    name="generoMusical"
-                    value={formData.generoMusical}
+                    name="endereco"
+                    value={formData.endereco}
                     onChange={handleChange}
                   />
                 </div>
 
                 <div className="col-span-6 sm:col-span-3">
                   <InputBase
-                    label="Biografia"
+                    label="Tipo de Endereço"
                     type="text"
-                    name="biografia"
-                    value={formData.biografia}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="col-span-6 sm:col-span-3">
-                  <InputBase
-                    label="Portfolio"
-                    type="text"
-                    name="portfolio"
-                    value={formData.portfolio}
+                    name="tipoEndereco"
+                    value={formData.tipoEndereco}
                     onChange={handleChange}
                   />
                 </div>
 
                 <div className="col-span-6">
                   <InputBase
-                    label="Disponibilidade"
+                    label="Descrição"
                     type="text"
-                    name="disponibilidade"
-                    value={formData.disponibilidade}
+                    name="descricao"
+                    value={formData.descricao}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <InputBase
+                    label="Horário de Funcionamento"
+                    type="text"
+                    name="horarioFuncionamento"
+                    value={formData.horarioFuncionamento}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <InputBase
+                    label="Capacidade"
+                    type="number"
+                    name="capacidade"
+                    value={formData.capacidade}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="col-span-6">
+                  <InputBase
+                    label="Preferência Musical"
+                    type="text"
+                    name="preferenciaMusical"
+                    value={formData.preferenciaMusical}
                     onChange={handleChange}
                   />
                 </div>
@@ -214,5 +239,5 @@ export default function CadastroEstabelecimentoPage(){
         </div>
       </section>
     </>
-    )
+  );
 }
