@@ -13,6 +13,14 @@ const Estabelecimento = sequelize.define('Estabelecimento', {
   horarioFuncionamento: DataTypes.STRING,
   capacidade: DataTypes.INTEGER,
   preferenciaMusical: DataTypes.STRING,
+  resetToken: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  resetTokenExpiry: {
+    type: DataTypes.DATE,
+    allowNull: true
+  }
 });
 
 export default Estabelecimento;

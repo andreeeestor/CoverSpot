@@ -8,6 +8,7 @@ import CadastroCoverPage from "./pages/autenticacao/cadastroCover"
 import LoginPage from "./pages/autenticacao/login"
 import CadastroEstabelecimentoPage from "./pages/autenticacao/cadastroEstabelecimento"
 import DestaquePage from "./pages/destaque"
+import DashboardEstabelecimentoPage from "./pages/dashboardEstabelecimento"
 
 export default function App(){
     return(
@@ -22,6 +23,7 @@ export default function App(){
                 <Route path="/autenticacao/login" element={<LoginPage />} />
                 <Route path="/autenticacao/cadastrocover" element={<CadastroCoverPage />} />
                 <Route path="/autenticacao/cadastroestabelecimento" element={<CadastroEstabelecimentoPage />} />
+                <Route path="/dashboard-estabelecimento" element={<DashboardEstabelecimentoPage />} />
                 {/* <Route path="/suporte/chatEstabelecimento" element={<SuportePage />} /> */}
             </Routes>
         </BrowserRouter>   

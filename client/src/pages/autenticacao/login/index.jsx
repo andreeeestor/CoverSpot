@@ -11,15 +11,16 @@ import Button from "../../../components/Button";
 import { PaperPlaneTilt } from "@phosphor-icons/react";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [resetEmail, setResetEmail] = useState(""); 
   const navigate = useNavigate();
 
   function onCloseModal() {
     setOpenModal(false);
-    setEmail("");
+    setResetEmail(""); 
   }
 
   async function handleSubmit(event) {
@@ -30,7 +31,7 @@ export default function LoginPage() {
       const response = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, senha }),
+        body: JSON.stringify({ email: loginEmail, senha }),
       });
 
       const data = await response.json();
@@ -58,27 +59,71 @@ export default function LoginPage() {
     }
   }
 
+  async function handleResetRequest(event) {
+    event.preventDefault();
+    
+    if (!resetEmail) {
+      toast.error("Por favor, informe um email");
+      return;
+    }
+    
+    setLoading(true);
+
+    try {
+      console.log('Sending reset request for email:', resetEmail);
+      
+      const response = await fetch('http://localhost:3000/api/auth/request-reset', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({ email: resetEmail })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        toast.success('Email de redefinição enviado com sucesso!');
+        onCloseModal();
+      } else {
+        toast.error(data.error || 'Erro ao enviar email de redefinição');
+      }
+    } catch (error) {
+      console.error('Erro detalhado:', error);
+      toast.error(`Erro ao conectar com o servidor: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       <Modal show={openModal} size="md" onClose={onCloseModal} popup>
         <Modal.Header className="px-6 pt-6 text-pretty font-semibold tracking-tight text-gray-900 lg:text-balance">
           Redefinição de senha
         </Modal.Header>
-        <div className="w-5/6 h-px " />
-        <Modal.Body className="space-y-6 pt-3">
-          <InputBase
-            type={"email"}
-            label={
-              "Informe seu EMAIL registrado que te enviaremos um link para recuperação da senha: "
-            }
-          />
-          <Button
-            className={"w-full flex justify-center"}
-            text={"ENVIAR"}
-            icon={<PaperPlaneTilt weight="fill" />}
-          />
+        <div className="w-5/6 h-px" />
+        <Modal.Body className="pt-3">
+          <form className="space-y-6" onSubmit={handleResetRequest}>
+            <InputBase
+              type="email"
+              label="Informe seu EMAIL registrado que te enviaremos um link para recuperação da senha:"
+              value={resetEmail}
+              onChange={(e) => setResetEmail(e.target.value)}
+              required
+            />
+            <Button
+              className="w-full flex justify-center"
+              text={loading ? "ENVIANDO..." : "ENVIAR"}
+              icon={<PaperPlaneTilt weight="fill" />}
+              disabled={loading}
+              type="submit"
+            />
+          </form>
         </Modal.Body>
       </Modal>
+
       <Toaster
         expand
         position="top-center"
@@ -127,8 +172,9 @@ export default function LoginPage() {
                     label="Email"
                     type="email"
                     name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -138,6 +184,7 @@ export default function LoginPage() {
                     name="senha"
                     value={senha}
                     onChange={(e) => setSenha(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -157,6 +204,7 @@ export default function LoginPage() {
                   <button
                     type="submit"
                     className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+                    disabled={loading}
                   >
                     {loading ? <img src={loadingsvg} /> : "Entrar"}
                   </button>

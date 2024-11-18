@@ -105,7 +105,7 @@ export default function CadastroEstabelecimentoPage() {
                 onSubmit={handleSubmit}
                 className="mt-8 grid grid-cols-6 gap-6"
               >
-                <div className="col-span-6">
+                <div className="col-span-6 sm:col-span-3">
                   <InputBase
                     label="Nome do Estabelecimento"
                     type="text"
@@ -115,7 +115,7 @@ export default function CadastroEstabelecimentoPage() {
                   />
                 </div>
 
-                <div className="col-span-6 sm:col-span-3">
+                <div className="col-span-6  sm:col-span-3">
                   <InputBase
                     label="CNPJ"
                     type="text"
@@ -145,7 +145,7 @@ export default function CadastroEstabelecimentoPage() {
                   />
                 </div>
 
-                <div className="col-span-6 sm:col-span-3">
+                <div className="col-span-6">
                   <InputPassword
                     label="Senha"
                     name="senha"
@@ -156,6 +156,16 @@ export default function CadastroEstabelecimentoPage() {
 
                 <div className="col-span-6">
                   <InputBase
+                    label="Tipo de Estabelecimento"
+                    type="text"
+                    name="tipoEndereco"
+                    value={formData.tipoEndereco}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <InputBase
                     label="Endereço"
                     type="text"
                     name="endereco"
@@ -164,17 +174,8 @@ export default function CadastroEstabelecimentoPage() {
                   />
                 </div>
 
-                <div className="col-span-6 sm:col-span-3">
-                  <InputBase
-                    label="Tipo de Endereço"
-                    type="text"
-                    name="tipoEndereco"
-                    value={formData.tipoEndereco}
-                    onChange={handleChange}
-                  />
-                </div>
 
-                <div className="col-span-6">
+                <div className="col-span-6 sm:col-span-3">
                   <InputBase
                     label="Descrição"
                     type="text"
