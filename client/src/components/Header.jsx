@@ -1,11 +1,10 @@
-import styles from "../styles/Header.module.css"
 import logo from "../assets/coverspot 3.png"
 
 export default function Header() {
   return (
-    <header className={styles.header}>
+    <header>
       <div className="pr-6">
-        <img className={styles.logo} src={logo} alt="CoverSpot Logo" />
+        <img  src={logo} alt="CoverSpot Logo" />
       </div>
       <nav>
         <ul className="flex gap-x-5 text-[#007bff] transition-all">

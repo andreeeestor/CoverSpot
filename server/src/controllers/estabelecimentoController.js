@@ -109,5 +109,45 @@ export const EstabelecimentoController = {
     } catch (error) {
       res.status(500).json({ error: 'Erro ao deletar estabelecimento' });
     }
+  },
+
+  async getPerfil(req, res) {
+    try {
+      const estabelecimento = await Estabelecimento.findByPk(req.userId, {
+        attributes: { 
+          exclude: ['senha', 'resetToken', 'resetTokenExpiry'] 
+        }
+      });
+
+      if (!estabelecimento) {
+        return res.status(404).json({ error: 'Estabelecimento não encontrado' });
+      }
+
+      res.json(estabelecimento);
+    } catch (error) {
+      console.error('Erro ao buscar perfil:', error);
+      res.status(500).json({ error: 'Erro ao buscar perfil do estabelecimento' });
+    }
+  },
+
+  async updatePerfil(req, res) {
+    try {
+      const estabelecimento = await Estabelecimento.findByPk(req.userId);
+      
+      if (!estabelecimento) {
+        return res.status(404).json({ error: 'Estabelecimento não encontrado' });
+      }
+  
+      const { senha, resetToken, resetTokenExpiry, ...dadosAtualizacao } = req.body;
+  
+      await estabelecimento.update(dadosAtualizacao);
+      
+      const { senha: _, resetToken: __, resetTokenExpiry: ___, ...estabelecimentoAtualizado } = estabelecimento.toJSON();
+      
+      res.json(estabelecimentoAtualizado);
+    } catch (error) {
+      console.error('Erro ao atualizar estabelecimento:', error);
+      res.status(500).json({ error: 'Erro ao atualizar estabelecimento' });
+    }
   }
 };

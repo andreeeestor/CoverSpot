@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import Sidebar from '../../components/Sidebar'
 
 export default function DashboardEstabelecimentoPage(){
     return(
+      <>
+      <Sidebar active />
         <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
         <div
           aria-hidden="true"
@@ -121,5 +124,6 @@ export default function DashboardEstabelecimentoPage(){
           </div>
         </form>
       </div>
+      </>
     )
 }

@@ -2,17 +2,70 @@ import { DataTypes } from 'sequelize';
 import sequelize from "../config/db.js";
 
 const Estabelecimento = sequelize.define('Estabelecimento', {
-  nome: DataTypes.STRING,
-  cnpj: DataTypes.STRING,
-  email: DataTypes.STRING,
-  telefone: DataTypes.STRING,
-  senha: DataTypes.STRING,
-  endereco: DataTypes.STRING,
-  tipoEndereco: DataTypes.STRING,
-  descricao: DataTypes.TEXT,
-  horarioFuncionamento: DataTypes.STRING,
-  capacidade: DataTypes.INTEGER,
-  preferenciaMusical: DataTypes.STRING,
+  nome: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  cnpj: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      notEmpty: true
+    }
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      isEmail: true
+    }
+  },
+  telefone: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  senha: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  endereco: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  tipoEndereco: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  descricao: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  horarioFuncionamento: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  capacidade: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      min: 1
+    }
+  },
+  preferenciaMusical: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   resetToken: {
     type: DataTypes.STRING,
     allowNull: true
