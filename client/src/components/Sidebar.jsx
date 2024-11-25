@@ -13,6 +13,7 @@ import {
   UserCirclePlus,
   UserCircle,
   SignOut,
+  Playlist,
 } from "@phosphor-icons/react";
 
 const Sidebar = ({ active }) => {
@@ -61,6 +62,7 @@ const Sidebar = ({ active }) => {
           open={open}
           link="/comunidade"
         />
+        <Option Icon={Playlist} title="Bandas" open={open} link="/bandas" />
         <Option Icon={Headset} title="Suporte" open={open} link="/suporte" />
         <hr />
         

@@ -1,5 +1,4 @@
 import BandCover from '../models/BandaCover.js';
-
 import bcrypt from 'bcrypt';
 
 export const BandaCoverController = {
@@ -18,7 +17,6 @@ export const BandaCoverController = {
         disponibilidade
       } = req.body;
 
-      // Verificar se já existe banda com este nome
       const bandaExistente = await BandCover.findOne({ where: { nomeCover } });
       if (bandaExistente) {
         return res.status(400).json({ error: 'Nome da banda já cadastrado' });
@@ -38,7 +36,6 @@ export const BandaCoverController = {
         disponibilidade
       });
 
-      // Removendo a senha do retorno
       const { senha: _, ...bandaSemSenha } = banda.toJSON();
       res.status(201).json(bandaSemSenha);
     } catch (error) {
@@ -73,39 +70,61 @@ export const BandaCoverController = {
     }
   },
 
-  // Atualizar banda
-  async update(req, res) {
+  // Buscar perfil da banda autenticada
+  async getPerfil(req, res) {
     try {
-      const banda = await BandCover.findByPk(req.params.id);
+      const banda = await BandCover.findByPk(req.userId, {
+        attributes: { 
+          exclude: ['senha', 'resetToken', 'resetTokenExpiry'] 
+        }
+      });
+
       if (!banda) {
-        return res.status(404).json({ error: 'Banda cover não encontrada' });
+        return res.status(404).json({ error: 'Banda não encontrada' });
       }
 
-      if (req.body.senha) {
-        req.body.senha = await bcrypt.hash(req.body.senha, 10);
-      }
-
-      await banda.update(req.body);
-      
-      const { senha: _, ...bandaAtualizada } = banda.toJSON();
-      res.json(bandaAtualizada);
+      res.json(banda);
     } catch (error) {
-      res.status(500).json({ error: 'Erro ao atualizar banda cover' });
+      console.error('Erro ao buscar perfil:', error);
+      res.status(500).json({ error: 'Erro ao buscar perfil da banda' });
     }
   },
 
-  // Deletar banda
+  // Atualizar perfil da banda autenticada
+  async updatePerfil(req, res) {
+    try {
+      const banda = await BandCover.findByPk(req.userId);
+      
+      if (!banda) {
+        return res.status(404).json({ error: 'Banda não encontrada' });
+      }
+  
+      const { senha, resetToken, resetTokenExpiry, ...dadosAtualizacao } = req.body;
+  
+      await banda.update(dadosAtualizacao);
+      
+      const { senha: _, resetToken: __, resetTokenExpiry: ___, ...bandaAtualizada } = banda.toJSON();
+      
+      res.json(bandaAtualizada);
+    } catch (error) {
+      console.error('Erro ao atualizar banda:', error);
+      res.status(500).json({ error: 'Erro ao atualizar banda' });
+    }
+  },
+
+  // Deletar banda autenticada
   async delete(req, res) {
     try {
-      const banda = await BandCover.findByPk(req.params.id);
+      const banda = await BandCover.findByPk(req.userId);
       if (!banda) {
-        return res.status(404).json({ error: 'Banda cover não encontrada' });
+        return res.status(404).json({ error: 'Banda não encontrada' });
       }
 
       await banda.destroy();
       res.status(204).send();
     } catch (error) {
-      res.status(500).json({ error: 'Erro ao deletar banda cover' });
+      console.error('Erro ao deletar banda:', error);
+      res.status(500).json({ error: 'Erro ao deletar banda' });
     }
-  }
+  },
 };

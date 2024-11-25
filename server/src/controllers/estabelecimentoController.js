@@ -99,14 +99,15 @@ export const EstabelecimentoController = {
   // Deletar estabelecimento
   async delete(req, res) {
     try {
-      const estabelecimento = await Estabelecimento.findByPk(req.params.id);
+      const estabelecimento = await Estabelecimento.findByPk(req.userId); // Usa req.userId do authMiddleware
       if (!estabelecimento) {
         return res.status(404).json({ error: 'Estabelecimento não encontrado' });
       }
-
+  
       await estabelecimento.destroy();
       res.status(204).send();
     } catch (error) {
+      console.error('Erro ao deletar estabelecimento:', error);
       res.status(500).json({ error: 'Erro ao deletar estabelecimento' });
     }
   },

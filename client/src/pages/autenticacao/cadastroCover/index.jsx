@@ -20,14 +20,58 @@ export default function CadastroCoverPage() {
     disponibilidade: "",
   });
   const [loading, setLoading] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "telefone") {
+      // Remove caracteres não numéricos
+      const phoneValue = value.replace(/\D/g, "");
+      if (phoneValue.length > 11) return; // Limita a 11 dígitos
+
+      setPhoneError("");
+      if (phoneValue.length > 0 && !validatePhone(phoneValue)) {
+        setPhoneError(
+          "Telefone inválido. Digite um número celular válido com DDD"
+        );
+      }
+    }
     setFormData({ ...formData, [name]: value });
+  };
+
+  const validatePhone = (phone) => {
+    const cleanPhone = phone.replace(/\D/g, "");
+
+    if (cleanPhone.length !== 11 && cleanPhone.length !== 9) {
+      return false;
+    }
+
+    if (cleanPhone.length === 11 && cleanPhone.substring(2, 3) !== "9") {
+      return false;
+    }
+    if (cleanPhone.length === 9 && cleanPhone.substring(0, 1) !== "9") {
+      return false;
+    }
+
+    return true;
+  };
+
+  const formatPhoneForWhatsApp = (phone) => {
+    const cleanPhone = phone.replace(/\D/g, "");
+    if (cleanPhone.length === 9) {
+      return `5511${cleanPhone}`;
+    }
+    return `55${cleanPhone}`;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validatePhone(formData.telefone)) {
+      toast.error("Por favor, insira um número de celular válido com DDD");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch("http://localhost:3000/api/bandas-cover", {
@@ -35,7 +79,10 @@ export default function CadastroCoverPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          telefone: formData.telefone.replace(/\D/g, ""),
+        }),
       });
 
       if (response.ok) {
@@ -56,7 +103,7 @@ export default function CadastroCoverPage() {
 
   return (
     <>
-    <Toaster
+      <Toaster
         expand
         position="top-center"
         richColors
@@ -133,11 +180,15 @@ export default function CadastroCoverPage() {
                 <div className="col-span-6 sm:col-span-3">
                   <InputBase
                     label="Celular"
-                    type="number"
+                    type="tel"
                     name="telefone"
                     value={formData.telefone}
                     onChange={handleChange}
+                    error={phoneError}
                   />
+                  {phoneError && (
+                    <p className="mt-1 text-sm text-red-600">{phoneError}</p>
+                  )}
                 </div>
 
                 <div className="col-span-6 relative">

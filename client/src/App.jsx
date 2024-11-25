@@ -12,6 +12,7 @@ import DashboardEstabelecimentoPage from "./pages/dashboardEstabelecimento";
 import { ProtectedEstabelecimentoRoute } from "./components/ProtectedRoute";
 import PerfilEstabelecimentoPage from "./pages/perfilEstabelecimento";
 import PerfilClientePage from "./pages/perfilCliente";
+import ListaBandasPage from "./pages/listaBandas";
 
 export default function App() {
   return (
@@ -54,6 +55,7 @@ export default function App() {
             // </ProtectedRoute>
           }
         />
+        <Route path="/bandas" element={<ListaBandasPage />} />
         {/* <Route path="/suporte/chatEstabelecimento" element={<SuportePage />} /> */}
       </Routes>
     </BrowserRouter>

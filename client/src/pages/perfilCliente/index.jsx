@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Sidebar from "../../components/Sidebar";
 import axios from 'axios';
 
 export default function PerfilClientePage() {
@@ -9,12 +10,14 @@ export default function PerfilClientePage() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   
   const [cliente, setCliente] = useState({
+    nomeCover: '',
     nome: '',
     email: '',
     telefone: '',
     generoMusical: '',
-    redesSociais: '',
-    biografia: ''
+    biografia: '',
+    portfolio: '',
+    disponibilidade: ''
   });
 
   const [formData, setFormData] = useState({...cliente});
@@ -23,20 +26,35 @@ export default function PerfilClientePage() {
     const fetchCliente = async () => {
       try {
         const token = localStorage.getItem('token');
+        if (!token) {
+          console.error("Token não encontrado");
+          navigate('/login');
+          return;
+        }
+        
         const response = await axios.get('http://localhost:3000/api/banda/perfil', {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { 
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
         });
+        
+        console.log("Dados recebidos:", response.data);
         setCliente(response.data);
         setFormData(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Erro ao carregar dados:', error);
+        if (error.response?.status === 401) {
+          localStorage.removeItem('token');
+          navigate('/login');
+        }
         setLoading(false);
       }
     };
-
+  
     fetchCliente();
-  }, []);
+  }, [navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,15 +68,23 @@ export default function PerfilClientePage() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.put('http://localhost:3000/api/banda/update', formData, {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.put('http://localhost:3000/api/banda/update', formData, {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
-      setCliente(formData);
+  
+      setCliente(response.data);
       setIsEditing(false);
       alert('Perfil atualizado com sucesso!');
     } catch (error) {
       console.error('Erro ao atualizar perfil:', error);
-      alert('Erro ao atualizar perfil');
+      if (error.response?.status === 401) {
+        navigate('/login');
+      } else {
+        alert(error.response?.data?.error || 'Erro ao atualizar perfil');
+      }
     }
   };
 
@@ -66,8 +92,12 @@ export default function PerfilClientePage() {
     try {
       const token = localStorage.getItem('token');
       await axios.delete('http://localhost:3000/api/banda/delete', {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
+      
       localStorage.removeItem('token');
       localStorage.removeItem('userType');
       navigate('/');
@@ -86,6 +116,8 @@ export default function PerfilClientePage() {
   }
 
   return (
+    <>
+    <Sidebar active />
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <div className="flex justify-between items-center mb-6">
@@ -110,7 +142,21 @@ export default function PerfilClientePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Nome
+                Nome da Banda
+              </label>
+              <input
+                type="text"
+                name="nomeCover"
+                value={isEditing ? formData.nomeCover : cliente.nomeCover}
+                onChange={handleInputChange}
+                disabled={!isEditing}
+                className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Nome do Responsável
               </label>
               <input
                 type="text"
@@ -154,7 +200,8 @@ export default function PerfilClientePage() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Gênero Musical
               </label>
-              <input type="text"
+              <input
+                type="text"
                 name="generoMusical"
                 value={isEditing ? formData.generoMusical : cliente.generoMusical}
                 onChange={handleInputChange}
@@ -163,19 +210,34 @@ export default function PerfilClientePage() {
               />
             </div>
 
-            <div className="col-span-2">
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Redes Sociais
+                Disponibilidade
               </label>
               <input
                 type="text"
-                name="redesSociais"
-                value={isEditing ? formData.redesSociais : cliente.redesSociais}
+                name="disponibilidade"
+                value={isEditing ? formData.disponibilidade : cliente.disponibilidade}
                 onChange={handleInputChange}
                 disabled={!isEditing}
                 className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
-                placeholder="Instagram, Facebook, etc"
+                placeholder="Ex: Fins de semana, noites..."
               />
+            </div>
+
+            <div className="col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Portfólio
+              </label>
+              <textarea
+                name="portfolio"
+                value={isEditing ? formData.portfolio : cliente.portfolio}
+                onChange={handleInputChange}
+                disabled={!isEditing}
+                rows="3"
+                className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+                placeholder="Links para vídeos, apresentações anteriores..."
+              ></textarea>
             </div>
 
             <div className="col-span-2">
@@ -207,7 +269,6 @@ export default function PerfilClientePage() {
         </form>
       </div>
 
-      {/* Modal de Confirmação de Exclusão */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
@@ -231,5 +292,6 @@ export default function PerfilClientePage() {
         </div>
       )}
     </div>
+    </>
   );
 }
