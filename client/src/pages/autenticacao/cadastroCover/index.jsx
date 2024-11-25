@@ -20,21 +20,12 @@ export default function CadastroCoverPage() {
     disponibilidade: "",
   });
   const [loading, setLoading] = useState(false);
-  const [phoneError, setPhoneError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "telefone") {
-      // Remove caracteres não numéricos
       const phoneValue = value.replace(/\D/g, "");
-      if (phoneValue.length > 11) return; // Limita a 11 dígitos
-
-      setPhoneError("");
-      if (phoneValue.length > 0 && !validatePhone(phoneValue)) {
-        setPhoneError(
-          "Telefone inválido. Digite um número celular válido com DDD"
-        );
-      }
+      if (phoneValue.length > 11) return; 
     }
     setFormData({ ...formData, [name]: value });
   };
@@ -184,11 +175,7 @@ export default function CadastroCoverPage() {
                     name="telefone"
                     value={formData.telefone}
                     onChange={handleChange}
-                    error={phoneError}
                   />
-                  {phoneError && (
-                    <p className="mt-1 text-sm text-red-600">{phoneError}</p>
-                  )}
                 </div>
 
                 <div className="col-span-6 relative">

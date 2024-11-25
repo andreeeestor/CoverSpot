@@ -49,12 +49,12 @@ const Sidebar = ({ active }) => {
 
       <div className="space-y-1">
         <Option Icon={House} title="Home" open={open} link="/" />
-        <Option
+        {/* <Option
           Icon={AddressBook}
           title="Sobre Nós"
           open={open}
           link="/sobre"
-        />
+        /> */}
         <Option Icon={Question} title="FAQs" open={open} link="/faqs" />
         <Option
           Icon={UsersThree}

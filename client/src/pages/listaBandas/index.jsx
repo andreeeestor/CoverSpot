@@ -40,11 +40,12 @@ const ListaBandasPage = () => {
     : bands.filter(band => band.generoMusical === selectedGenre);
 
     const handleSendProposal = (band) => {
-        // const token = localStorage.getItem('token');
-        // if (!token) {
-        //   navigate('/login');
-        //   return;
-        // }
+        const token = localStorage.getItem('token');
+        if (!token) {
+          alert("É necessário estar logado como ESTABELECIMENTO.")
+          navigate('/autenticacao/login');
+          return;
+        }
     
         const message = encodeURIComponent(
           `Olá! Vi seu perfil no CoverSpot e gostaria de fazer uma proposta para um show. Podemos conversar?`

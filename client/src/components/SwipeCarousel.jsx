@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
 
 const imgs = [
-  // "../../public/img/img01.png",
   "../../public/img/img02.png",
   "../../public/img/img03.png",
   "../../public/img/img04.png",

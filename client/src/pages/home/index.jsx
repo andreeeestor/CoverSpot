@@ -3,28 +3,29 @@ import { SwipeCarousel } from "../../components/SwipeCarousel";
 import MainContainer from "../../components/MainContainer";
 import {
   AddressBook,
-  Compass,
   Target,
-  Shield,
   Eye,
-  ArrowRight,
   HandHeart,
 } from "@phosphor-icons/react";
-import Button from "../../components/Button";
+import Footer from "../../components/Footer";
 
 export default function HomePage() {
   const features = [
     {
       name: "Quem Somos",
-      description:
-        (
-          <>
-        <p>
-          Nossa equipe é composta por uma mistura diversificada de profissionais criativos, desenvolvedores de software e entusiastas da música, todos unidos pela mesma visão de promover e apoiar a comunidade artística.
-        </p>
-        <p className="mt-2">
-          Estamos comprometidos em fornecer uma experiência excepcional tanto para artistas quanto para proprietários de locais. Acreditamos que a música ao vivo é uma parte fundamental da cultural. 
-        </p>
+      description: (
+        <>
+          <p>
+            Nossa equipe é composta por uma mistura diversificada de
+            profissionais criativos, desenvolvedores de software e entusiastas
+            da música, todos unidos pela mesma visão de promover e apoiar a
+            comunidade artística.
+          </p>
+          <p className="mt-2">
+            Estamos comprometidos em fornecer uma experiência excepcional tanto
+            para artistas quanto para proprietários de locais. Acreditamos que a
+            música ao vivo é uma parte fundamental da cultural.
+          </p>
         </>
       ),
       icon: AddressBook,
@@ -259,6 +260,9 @@ export default function HomePage() {
           </div>
         </div>
       </MainContainer>
+      <footer className="my-12">
+        <Footer />
+      </footer>
     </>
   );
 }
