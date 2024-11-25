@@ -14,6 +14,7 @@ import {
   UserCircle,
   SignOut,
   Playlist,
+  Chats,
 } from "@phosphor-icons/react";
 
 const Sidebar = ({ active }) => {
@@ -22,19 +23,19 @@ const Sidebar = ({ active }) => {
   const [userType, setUserType] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const storedUserType = localStorage.getItem('userType');
-    
+    const token = localStorage.getItem("token");
+    const storedUserType = localStorage.getItem("userType");
+
     setIsAuthenticated(!!token);
     setUserType(storedUserType);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userType');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userType");
     setIsAuthenticated(false);
     setUserType(null);
-    window.location.href = '/';
+    window.location.href = "/";
   };
 
   return (
@@ -62,17 +63,25 @@ const Sidebar = ({ active }) => {
           open={open}
           link="/comunidade"
         />
-        <Option Icon={Playlist} title="Bandas" open={open} link="/bandas" />
         <Option Icon={Headset} title="Suporte" open={open} link="/suporte" />
+        {userType === "estabelecimento" && (
+          <Option Icon={Playlist} title="Bandas" open={open} link="/bandas" />
+        )}
+        {/* {isAuthenticated && (
+          <Option Icon={Chats} title="Chats" open={open} link="/chat" />
+        )} */}
         <hr />
-        
         {isAuthenticated ? (
           <>
-            <Option 
-              Icon={UserCircle} 
-              title="Meu Perfil" 
-              open={open} 
-              link={userType === 'estabelecimento' ? '/perfil-estabelecimento' : '/perfil'}
+            <Option
+              Icon={UserCircle}
+              title="Meu Perfil"
+              open={open}
+              link={
+                userType === "estabelecimento"
+                  ? "/perfil-estabelecimento"
+                  : "/perfil"
+              }
               active={active}
             />
             <button
@@ -99,12 +108,12 @@ const Sidebar = ({ active }) => {
             </button>
           </>
         ) : (
-          <Option 
-            Icon={UserCirclePlus} 
-            title="Autenticação" 
-            open={open} 
-            link="/autenticacao" 
-            active={active} 
+          <Option
+            Icon={UserCirclePlus}
+            title="Autenticação"
+            open={open}
+            link="/autenticacao"
+            active={active}
           />
         )}
       </div>

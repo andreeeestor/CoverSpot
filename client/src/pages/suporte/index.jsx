@@ -110,7 +110,6 @@ export default function SuportePage() {
           </div>
         </section>
       </MainContainer>
-      <Footer />
     </>
   );
 }
