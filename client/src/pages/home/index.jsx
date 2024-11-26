@@ -8,6 +8,7 @@ import {
   HandHeart,
 } from "@phosphor-icons/react";
 import Footer from "../../components/Footer";
+import { UserCircle } from "@phosphor-icons/react/dist/ssr";
 
 export default function HomePage() {
   const features = [
@@ -117,27 +118,27 @@ export default function HomePage() {
         </div>
 
         <section className="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center 2xl:rounded-lg">
-          <div className="p-8 md:p-12 lg:px-16 lg:py-24">
-            <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-              <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
-                Lorem, ipsum dolor sit amet
-              </h2>
+  <div className="p-8 md:p-12 lg:px-16 lg:py-24">
+    <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+      <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
+        Conecte sua banda ao palco certo!
+      </h2>
 
-              <p className="text-gray-500 md:mt-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
-                egestas tempus tellus etiam sed. Quam a scelerisque amet
-                ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
-                quisque ut interdum tincidunt duis.
-              </p>
-            </div>
-          </div>
+      <p className="text-gray-500 md:mt-4">
+        Apresente seu talento e encontre oportunidades de se apresentar em estabelecimentos incríveis.  
+        Ou, se você é um estabelecimento, descubra bandas covers excepcionais para animar o seu evento.  
+        A CoverSpot facilita a conexão entre artistas e palcos.
+      </p>
+    </div>
+  </div>
 
-          <img
-            alt=""
-            src="https://images.unsplash.com/photo-1484959014842-cd1d967a39cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            className="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
-          />
-        </section>
+  <img
+    alt="Banda se apresentando"
+    src="https://images.unsplash.com/photo-1484959014842-cd1d967a39cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+    className="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
+  />
+</section>
+
 
         <section className="text-gray-600 body-font">
           <div className="container px-5 py-24 mx-auto">
@@ -159,91 +160,67 @@ export default function HomePage() {
             <div className="flex flex-wrap -m-2">
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <img
-                    alt="team"
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                    src="https://dummyimage.com/80x80"
-                  />
+                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
-                      Holden Caulfield
+                      Marcelo Debarry
                     </h2>
-                    <p className="text-gray-500">UI Designer</p>
+                    <p className="text-gray-500">Tech Lead</p>
                   </div>
                 </div>
               </div>
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <img
-                    alt="team"
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                    src="https://dummyimage.com/84x84"
-                  />
+                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
-                      Henry Letham
+                      Murilo Rezende
                     </h2>
-                    <p className="text-gray-500">CTO</p>
+                    <p className="text-gray-500">Back-End</p>
                   </div>
                 </div>
               </div>
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <img
-                    alt="team"
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                    src="https://dummyimage.com/88x88"
-                  />
+                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
-                      Oskar Blinde
+                      Gustavo Henrique
                     </h2>
-                    <p className="text-gray-500">Founder</p>
+                    <p className="text-gray-500">Front-End</p>
                   </div>
                 </div>
               </div>
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <img
-                    alt="team"
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                    src="https://dummyimage.com/90x90"
-                  />
+                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
-                      John Doe
+                      Davi Vital
                     </h2>
-                    <p className="text-gray-500">DevOps</p>
+                    <p className="text-gray-500">Figma</p>
                   </div>
                 </div>
               </div>
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <img
-                    alt="team"
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                    src="https://dummyimage.com/94x94"
-                  />
+                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
-                      Martin Eden
+                      Isaac
                     </h2>
-                    <p className="text-gray-500">Software Engineer</p>
+                    <p className="text-gray-500">Banco de Dados</p>
                   </div>
                 </div>
               </div>
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <img
-                    alt="team"
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                    src="https://dummyimage.com/98x98"
-                  />
+                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
-                      Boris Kitua
+                      Arthur Botelho
                     </h2>
-                    <p className="text-gray-500">UX Researcher</p>
+                    <p className="text-gray-500">Designer</p>
                   </div>
                 </div>
               </div>
