@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import sequelize from './config/db.js';
-import estabelecimentoRoutes from "./routes/estabelecimentoRoutes.js"
-import bandaCoverRoutes from "./routes/bandaRoutes.js"
+import estabelecimentoRoutes from "./routes/estabelecimentoRoutes.js";
+import bandaCoverRoutes from "./routes/bandaRoutes.js";
 import authRoutes from './routes/authRoutes.js';
+import propostaRoutes from './routes/propostaRoutes.js'; // Importe as rotas de propostas
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api', estabelecimentoRoutes);
 app.use('/api', bandaCoverRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api', propostaRoutes);  // Adicione essa linha
 
 sequelize.sync({ alter: true })
   .then(() => {

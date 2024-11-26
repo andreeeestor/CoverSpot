@@ -3,12 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Guitar, Phone, Envelope, Calendar, MapPin, Star, WhatsappLogo } from '@phosphor-icons/react';
 import Sidebar from '../../components/Sidebar';
+import ModalProposta from '../../components/ModalPropostas';
 
 const ListaBandasPage = () => {
   const [bands, setBands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedGenre, setSelectedGenre] = useState('all');
+  const [showModal, setShowModal] = useState(false);
+  const [selectedBanda, setSelectedBanda] = useState(null);
   const navigate = useNavigate();
+
+  const openModal = (bandaId) => {
+    setSelectedBanda(bandaId);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedBanda(null);
+  };
 
   useEffect(() => {
     const fetchBands = async () => {
@@ -136,7 +149,7 @@ const ListaBandasPage = () => {
               </div>
 
               <button
-                // onClick={() => handleSendProposal(band)}
+                onClick={() => openModal(band.id)}
                 className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium
                   hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center gap-2"
               >
@@ -155,6 +168,10 @@ const ListaBandasPage = () => {
           </div>
         ))}
       </div>
+
+      {showModal && (
+        <ModalProposta bandaId={selectedBanda} onClose={closeModal} />
+      )}
 
       {filteredBands.length === 0 && (
         <div className="text-center mt-12">

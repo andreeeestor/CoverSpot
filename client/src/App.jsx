@@ -12,6 +12,7 @@ import { ProtectedEstabelecimentoRoute } from "./components/ProtectedRoute";
 import PerfilEstabelecimentoPage from "./pages/perfilEstabelecimento";
 import PerfilClientePage from "./pages/perfilCliente";
 import ListaBandasPage from "./pages/listaBandas";
+import PropostasPage from "./pages/propostas";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/destaque" element={<DestaquePage />} />
         <Route path="/autenticacao" element={<AutenticacaoPage />} />
         <Route path="/autenticacao/login" element={<LoginPage />} />
+        <Route path="/propostas" element={<PropostasPage />} />
         <Route
           path="/autenticacao/cadastrocover"
           element={<CadastroCoverPage />}

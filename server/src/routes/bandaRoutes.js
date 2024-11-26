@@ -14,4 +14,6 @@ router.get('/banda/perfil', authMiddleware, BandaCoverController.getPerfil);
 router.put('/banda/update', authMiddleware, BandaCoverController.updatePerfil);
 router.delete('/banda/delete', authMiddleware, BandaCoverController.delete);
 
+router.get('/banda/propostas', authMiddleware, BandaCoverController.getPropostas);
+
 export default router;

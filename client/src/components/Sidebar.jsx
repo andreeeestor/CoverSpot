@@ -15,6 +15,7 @@ import {
   SignOut,
   Playlist,
   Chats,
+  Suitcase,
 } from "@phosphor-icons/react";
 
 const Sidebar = ({ active }) => {
@@ -67,6 +68,15 @@ const Sidebar = ({ active }) => {
         {userType === "estabelecimento" && (
           <Option Icon={Playlist} title="Bandas" open={open} link="/bandas" />
         )}
+        {userType === "banda" && (
+          <Option
+            Icon={Suitcase}
+            title="Propostas"
+            open={open}
+            link="/propostas"
+          />
+        )}
+
         {/* {isAuthenticated && (
           <Option Icon={Chats} title="Chats" open={open} link="/chat" />
         )} */}

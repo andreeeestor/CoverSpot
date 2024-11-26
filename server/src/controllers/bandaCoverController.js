@@ -1,5 +1,7 @@
 import BandCover from '../models/BandaCover.js';
 import bcrypt from 'bcrypt';
+import Proposta from '../models/Proposta.js';
+import Estabelecimento from '../models/Estabelecimento.js';
 
 export const BandaCoverController = {
   // Criar nova banda cover
@@ -125,6 +127,19 @@ export const BandaCoverController = {
     } catch (error) {
       console.error('Erro ao deletar banda:', error);
       res.status(500).json({ error: 'Erro ao deletar banda' });
+    }
+  },
+
+  async getPropostas(req, res) {
+    try {
+      const propostas = await Proposta.findAll({
+        where: { bandaId: req.userId }, // ID da banda autenticada
+        include: [{ model: Estabelecimento, attributes: ['nome', 'email'] }]
+      });
+      res.json(propostas);
+    } catch (error) {
+      console.error('Erro ao buscar propostas:', error);
+      res.status(500).json({ error: 'Erro ao buscar propostas' });
     }
   },
 };
