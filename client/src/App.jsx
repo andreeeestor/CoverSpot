@@ -32,18 +32,12 @@ export default function App() {
           path="/autenticacao/cadastroestabelecimento"
           element={<CadastroEstabelecimentoPage />}
         />
-        <Route element={<ProtectedEstabelecimentoRoute />}>
-        </Route>
+        <Route element={<ProtectedEstabelecimentoRoute />}></Route>
         <Route
           path="/perfil-estabelecimento"
           element={<PerfilEstabelecimentoPage />}
         />
-        <Route
-          path="/perfil"
-          element={
-              <PerfilClientePage />
-          }
-        />
+        <Route path="/perfil" element={<PerfilClientePage />} />
         <Route path="/bandas" element={<ListaBandasPage />} />
       </Routes>
     </BrowserRouter>
