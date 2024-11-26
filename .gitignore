@@ -1,4 +1,4 @@
 client/node_modules
 server/node_modules
 server/anotacoes.txt
-# server/src/cover_spot.db
+server/src/cover_spot.db
