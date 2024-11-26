@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 
 import {
-  AddressBook,
   Headset,
   House,
   MicrophoneStage,
@@ -14,8 +13,8 @@ import {
   UserCircle,
   SignOut,
   Playlist,
-  Chats,
   Suitcase,
+  ClockCounterClockwise
 } from "@phosphor-icons/react";
 
 const Sidebar = ({ active }) => {
@@ -51,12 +50,6 @@ const Sidebar = ({ active }) => {
 
       <div className="space-y-1">
         <Option Icon={House} title="Home" open={open} link="/" />
-        {/* <Option
-          Icon={AddressBook}
-          title="Sobre Nós"
-          open={open}
-          link="/sobre"
-        /> */}
         <Option Icon={Question} title="FAQs" open={open} link="/faqs" />
         <Option
           Icon={UsersThree}
@@ -66,7 +59,10 @@ const Sidebar = ({ active }) => {
         />
         <Option Icon={Headset} title="Suporte" open={open} link="/suporte" />
         {userType === "estabelecimento" && (
+          <>
           <Option Icon={Playlist} title="Bandas" open={open} link="/bandas" />
+          <Option Icon={ClockCounterClockwise} title="Histórico de Propostas" open={open} link="/historico-propostas" />
+          </>
         )}
         {userType === "banda" && (
           <Option
@@ -76,10 +72,6 @@ const Sidebar = ({ active }) => {
             link="/propostas"
           />
         )}
-
-        {/* {isAuthenticated && (
-          <Option Icon={Chats} title="Chats" open={open} link="/chat" />
-        )} */}
         <hr />
         {isAuthenticated ? (
           <>

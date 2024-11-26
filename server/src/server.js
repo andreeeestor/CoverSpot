@@ -4,7 +4,7 @@ import sequelize from './config/db.js';
 import estabelecimentoRoutes from "./routes/estabelecimentoRoutes.js";
 import bandaCoverRoutes from "./routes/bandaRoutes.js";
 import authRoutes from './routes/authRoutes.js';
-import propostaRoutes from './routes/propostaRoutes.js'; // Importe as rotas de propostas
+import propostaRoutes from './routes/propostaRoutes.js'; 
 
 const app = express();
 
@@ -14,9 +14,9 @@ app.use(express.json());
 app.use('/api', estabelecimentoRoutes);
 app.use('/api', bandaCoverRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api', propostaRoutes);  // Adicione essa linha
+app.use('/api', propostaRoutes);  
 
-sequelize.sync({ alter: true })
+sequelize.sync({ force: true })
   .then(() => {
     console.log('Banco de dados sincronizado');
     const PORT = process.env.PORT || 3000;

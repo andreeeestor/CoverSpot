@@ -13,6 +13,7 @@ import PerfilEstabelecimentoPage from "./pages/perfilEstabelecimento";
 import PerfilClientePage from "./pages/perfilCliente";
 import ListaBandasPage from "./pages/listaBandas";
 import PropostasPage from "./pages/propostas";
+import HistoricoPropostasPage from "./pages/historicoEstabelecimento";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/autenticacao" element={<AutenticacaoPage />} />
         <Route path="/autenticacao/login" element={<LoginPage />} />
         <Route path="/propostas" element={<PropostasPage />} />
+        <Route path="/historico-propostas" element={<HistoricoPropostasPage />} />
         <Route
           path="/autenticacao/cadastrocover"
           element={<CadastroCoverPage />}
