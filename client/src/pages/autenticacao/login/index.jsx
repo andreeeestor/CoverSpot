@@ -44,9 +44,9 @@ export default function LoginPage() {
         toast.success("Login realizado com sucesso!");
 
         if (data.tipo === "estabelecimento") {
-          navigate("/dashboard-estabelecimento");
+          navigate("/perfil-estabelecimento");
         } else {
-          navigate("/dashboard-banda");
+          navigate("/perfil");
         }
       } else {
         toast.error(data.error || "Credenciais inválidas");

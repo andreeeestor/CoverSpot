@@ -8,7 +8,6 @@ import CadastroCoverPage from "./pages/autenticacao/cadastroCover";
 import LoginPage from "./pages/autenticacao/login";
 import CadastroEstabelecimentoPage from "./pages/autenticacao/cadastroEstabelecimento";
 import DestaquePage from "./pages/destaque";
-import DashboardEstabelecimentoPage from "./pages/dashboardEstabelecimento";
 import { ProtectedEstabelecimentoRoute } from "./components/ProtectedRoute";
 import PerfilEstabelecimentoPage from "./pages/perfilEstabelecimento";
 import PerfilClientePage from "./pages/perfilCliente";
@@ -33,15 +32,7 @@ export default function App() {
           path="/autenticacao/cadastroestabelecimento"
           element={<CadastroEstabelecimentoPage />}
         />
-        <Route
-          path="/dashboard-estabelecimento"
-          element={<DashboardEstabelecimentoPage />}
-        />
         <Route element={<ProtectedEstabelecimentoRoute />}>
-          <Route
-            path="/dashboard-estabelecimento"
-            element={<DashboardEstabelecimentoPage />}
-          />
         </Route>
         <Route
           path="/perfil-estabelecimento"
@@ -50,13 +41,10 @@ export default function App() {
         <Route
           path="/perfil"
           element={
-            // <ProtectedRoute>
               <PerfilClientePage />
-            // </ProtectedRoute>
           }
         />
         <Route path="/bandas" element={<ListaBandasPage />} />
-        {/* <Route path="/suporte/chatEstabelecimento" element={<SuportePage />} /> */}
       </Routes>
     </BrowserRouter>
   );
