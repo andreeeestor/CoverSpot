@@ -14,7 +14,7 @@ import {
   SignOut,
   Playlist,
   Suitcase,
-  ClockCounterClockwise
+  ClockCounterClockwise,
 } from "@phosphor-icons/react";
 
 const Sidebar = ({ active }) => {
@@ -57,11 +57,15 @@ const Sidebar = ({ active }) => {
           open={open}
           link="/comunidade"
         />
-        <Option Icon={Headset} title="Suporte" open={open} link="/suporte" />
         {userType === "estabelecimento" && (
           <>
-          <Option Icon={Playlist} title="Bandas" open={open} link="/bandas" />
-          <Option Icon={ClockCounterClockwise} title="Histórico de Propostas" open={open} link="/historico-propostas" />
+            <Option Icon={Playlist} title="Bandas" open={open} link="/bandas" />
+            <Option
+              Icon={ClockCounterClockwise}
+              title="Histórico de Propostas"
+              open={open}
+              link="/historico-propostas"
+            />
           </>
         )}
         {userType === "banda" && (
@@ -72,6 +76,7 @@ const Sidebar = ({ active }) => {
             link="/propostas"
           />
         )}
+        <Option Icon={Headset} title="Suporte" open={open} link="/suporte" />
         <hr />
         {isAuthenticated ? (
           <>

@@ -25,7 +25,7 @@ export default function ComunidadePage() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data); // Verifique os dados aqui
+          console.log(data); 
           setEventos(data);
         } else {
           toast.error("Erro ao carregar eventos.");

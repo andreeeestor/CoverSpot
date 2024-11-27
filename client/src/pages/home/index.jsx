@@ -1,12 +1,7 @@
 import Sidebar from "../../components/Sidebar";
 import { SwipeCarousel } from "../../components/SwipeCarousel";
 import MainContainer from "../../components/MainContainer";
-import {
-  AddressBook,
-  Target,
-  Eye,
-  HandHeart,
-} from "@phosphor-icons/react";
+import { AddressBook, Target, Eye, HandHeart } from "@phosphor-icons/react";
 import Footer from "../../components/Footer";
 import { UserCircle } from "@phosphor-icons/react/dist/ssr";
 
@@ -118,27 +113,27 @@ export default function HomePage() {
         </div>
 
         <section className="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center 2xl:rounded-lg">
-  <div className="p-8 md:p-12 lg:px-16 lg:py-24">
-    <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-      <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
-        Conecte sua banda ao palco certo!
-      </h2>
+          <div className="p-8 md:p-12 lg:px-16 lg:py-24">
+            <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+              <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
+                Conecte sua banda ao palco certo!
+              </h2>
 
-      <p className="text-gray-500 md:mt-4">
-        Apresente seu talento e encontre oportunidades de se apresentar em estabelecimentos incríveis.  
-        Ou, se você é um estabelecimento, descubra bandas covers excepcionais para animar o seu evento.  
-        A CoverSpot facilita a conexão entre artistas e palcos.
-      </p>
-    </div>
-  </div>
+              <p className="text-gray-500 md:mt-4">
+                Apresente seu talento e encontre oportunidades de se apresentar
+                em estabelecimentos incríveis. Ou, se você é um estabelecimento,
+                descubra bandas covers excepcionais para animar o seu evento. A
+                CoverSpot facilita a conexão entre artistas e palcos.
+              </p>
+            </div>
+          </div>
 
-  <img
-    alt="Banda se apresentando"
-    src="https://images.unsplash.com/photo-1484959014842-cd1d967a39cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-    className="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
-  />
-</section>
-
+          <img
+            alt="Banda se apresentando"
+            src="https://images.unsplash.com/photo-1484959014842-cd1d967a39cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            className="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-ss-[30px] md:h-[calc(100%_-_4rem)] md:rounded-ss-[60px]"
+          />
+        </section>
 
         <section className="text-gray-600 body-font">
           <div className="container px-5 py-24 mx-auto">
@@ -160,7 +155,7 @@ export default function HomePage() {
             <div className="flex flex-wrap -m-2">
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
+                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
                       Marcelo Debarry
@@ -171,7 +166,7 @@ export default function HomePage() {
               </div>
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
+                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
                       Murilo Rezende
@@ -182,7 +177,7 @@ export default function HomePage() {
               </div>
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
+                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
                       Gustavo Henrique
@@ -193,7 +188,7 @@ export default function HomePage() {
               </div>
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
+                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
                       Davi Vital
@@ -215,7 +210,7 @@ export default function HomePage() {
               </div>
               <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
+                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
                       Arthur Botelho

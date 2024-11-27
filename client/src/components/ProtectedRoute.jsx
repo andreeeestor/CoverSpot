@@ -5,7 +5,7 @@ export const ProtectedEstabelecimentoRoute = () => {
   const isAuthenticated = localStorage.getItem('token');
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/autenticacao/login" replace />;
   }
 
   if (userType !== 'estabelecimento') {

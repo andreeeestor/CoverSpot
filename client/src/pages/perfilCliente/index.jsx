@@ -28,7 +28,7 @@ export default function PerfilClientePage() {
         const token = localStorage.getItem('token');
         if (!token) {
           console.error("Token não encontrado");
-          navigate('/login');
+          navigate('/autenticacao/login');
           return;
         }
         

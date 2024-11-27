@@ -1,7 +1,5 @@
 import Sidebar from "../../components/Sidebar";
-import Footer from "../../components/Footer";
 import MainContainer from "../../components/MainContainer";
-import { FloatingLabel } from "flowbite-react";
 import Button from "../../components/Button";
 import {
   Medal,
@@ -9,10 +7,32 @@ import {
   SealQuestion,
   UsersFour,
 } from "@phosphor-icons/react";
+import { toast, Toaster } from "sonner";
 
 export default function SuportePage() {
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    toast.success("Enviado com Sucesso!");
+  }
+
   return (
     <>
+      <Toaster
+        expand
+        position="top-center"
+        richColors
+        toastOptions={{
+          style: {
+            margin: "10px",
+            padding: "15px",
+            maxWidth: "400px",
+            borderRadius: "8px",
+            gap: "10px",
+            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+          },
+        }}
+      />
       <Sidebar />
       <MainContainer>
         {/* <main className="grid place-items-center h-screen"> */}
@@ -27,32 +47,38 @@ export default function SuportePage() {
             </p>
 
             <form
+              onSubmit={handleSubmit}
               className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
             >
-
               <div>
                 <div className="relative">
                   <input
                     type="text"
                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:border-[#18A0FB]"
                     placeholder="Digite aqui o que você procura:"
+                    required
                   />
-
                 </div>
               </div>
 
               <div>
                 <div className="relative">
                   <input
-                    type="text"
+                    type="email"
                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm focus:border-[#18A0FB]"
                     placeholder="E-mail ou nome de usuário:"
+                    required
                   />
-
                 </div>
               </div>
 
-              <Button icon={<PaperPlaneTilt weight="fill" />} text={"ENVIAR"} className={"w-full text-center flex items-center justify-center"} />
+              <Button
+                icon={<PaperPlaneTilt weight="fill" />}
+                text={"ENVIAR"}
+                className={
+                  "w-full text-center flex items-center justify-center"
+                }
+              />
             </form>
           </div>
         </div>
@@ -71,7 +97,11 @@ export default function SuportePage() {
                   </h2>
                   <p className="leading-relaxed text-base">
                     Não encontrou o que precisava na nossa Central de Ajuda?
-                    Você também pode enviar sua dúvida <span className="font-semibold text-sky-600 cursor-pointer transition-all hover:underline hover:opacity-85">clicando aqui</span>.
+                    Você também pode enviar sua dúvida{" "}
+                    <span className="font-semibold text-sky-600 cursor-pointer transition-all hover:underline hover:opacity-85">
+                      clicando aqui
+                    </span>
+                    .
                   </p>
                 </div>
               </div>
@@ -86,8 +116,11 @@ export default function SuportePage() {
                   <p className="leading-relaxed text-base">
                     Ainda não conhece nossa plataforma e quer entender por que
                     temos a melhor solução para o seu evento? Fale com um de
-                    nossos consultores <span className="font-semibold text-sky-600 cursor-pointer transition-all hover:underline hover:opacity-85">clicando aqui</span>, Vamos entrar em contato
-                    com você!
+                    nossos consultores{" "}
+                    <span className="font-semibold text-sky-600 cursor-pointer transition-all hover:underline hover:opacity-85">
+                      clicando aqui
+                    </span>
+                    , Vamos entrar em contato com você!
                   </p>
                 </div>
               </div>

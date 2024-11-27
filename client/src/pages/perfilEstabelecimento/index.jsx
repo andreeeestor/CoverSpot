@@ -164,7 +164,7 @@ export default function PerfilEstabelecimentoPage() {
                   name="cnpj"
                   value={isEditing ? formData.cnpj : estabelecimento.cnpj}
                   onChange={handleInputChange}
-                  disabled={true} // CNPJ não deve ser editável após cadastro
+                  disabled={true} 
                   className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
                 />
               </div>
@@ -315,7 +315,6 @@ export default function PerfilEstabelecimentoPage() {
           </form>
         </div>
 
-        {/* Modal de Confirmação de Exclusão */}
         {showDeleteModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 max-w-md w-full">

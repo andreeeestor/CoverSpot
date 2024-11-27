@@ -8,10 +8,10 @@ export function InputBase({ type, label, name, value, onChange }) {
 
       <input
         type={type}
-        name={name} // O nome é necessário para identificar o campo
+        name={name} 
         className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
         value={value}
-        onChange={onChange} // O evento precisa ser corretamente passado
+        onChange={onChange} 
         required
       />
     </>
@@ -33,10 +33,10 @@ export function InputPassword({ label, name, value, onChange }) {
       <div className="relative">
         <input
           type={isVisible ? "text" : "password"}
-          name={name} // Adicionando name
+          name={name} 
           className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
           value={value}
-          onChange={onChange} // Corrigindo onChange
+          onChange={onChange} 
           required
         />
 
