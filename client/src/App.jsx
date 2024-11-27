@@ -14,6 +14,7 @@ import PerfilClientePage from "./pages/perfilCliente";
 import ListaBandasPage from "./pages/listaBandas";
 import PropostasPage from "./pages/propostas";
 import HistoricoPropostasPage from "./pages/historicoEstabelecimento";
+import ComunidadePage from "./pages/comunidade";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/faqs" element={<FAQsPage />} />
         <Route path="/suporte" element={<SuportePage />} />
         <Route path="/destaque" element={<DestaquePage />} />
+        <Route path="/comunidade" element={<ComunidadePage />} />
         <Route path="/autenticacao" element={<AutenticacaoPage />} />
         <Route path="/autenticacao/login" element={<LoginPage />} />
         <Route path="/propostas" element={<PropostasPage />} />

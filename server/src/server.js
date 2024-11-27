@@ -5,6 +5,7 @@ import estabelecimentoRoutes from "./routes/estabelecimentoRoutes.js";
 import bandaCoverRoutes from "./routes/bandaRoutes.js";
 import authRoutes from './routes/authRoutes.js';
 import propostaRoutes from './routes/propostaRoutes.js'; 
+import eventRoutes from "./routes/eventRoutes.js"
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use('/api', estabelecimentoRoutes);
 app.use('/api', bandaCoverRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api', propostaRoutes);  
+app.use('/api', eventRoutes);
 
 sequelize.sync({ force: true })
   .then(() => {

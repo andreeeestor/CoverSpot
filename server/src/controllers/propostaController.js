@@ -11,7 +11,7 @@ export const PropostaController = {
       cacheEvento,
       bandaId
     } = req.body;
-    const estabelecimentoId = req.userId; // Assumindo que o usuário autenticado é um estabelecimento
+    const estabelecimentoId = req.userId; 
 
     try {
       const novaProposta = await Proposta.create({
@@ -32,7 +32,7 @@ export const PropostaController = {
 
   async atualizarStatus(req, res) {
     const { id } = req.params;
-    const { status } = req.body; // "aceita" ou "recusada"
+    const { status } = req.body; 
 
     try {
       const proposta = await Proposta.findByPk(id);

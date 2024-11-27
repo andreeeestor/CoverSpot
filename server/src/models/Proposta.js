@@ -30,11 +30,10 @@ const Proposta = sequelize.define('Proposta', {
   },
   status: {
     type: DataTypes.STRING,
-    defaultValue: 'pendente', // Valores: pendente, aceita, recusada
+    defaultValue: 'pendente', 
   },
 });
 
-// Relacionamentos
 Proposta.belongsTo(BandCover, { foreignKey: 'bandaId' });
 Proposta.belongsTo(Estabelecimento, { foreignKey: 'estabelecimentoId' });
 
