@@ -136,92 +136,32 @@ export default function HomePage() {
         </section>
 
         <section className="text-gray-600 body-font">
-          <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-col text-center w-full mb-20">
-              <h1 className="sm:text-5xl text-4xl lg:text-balance font-semibold text-pretty mb-6 tracking-tight text-gray-900">
-                Nossa Equipe
-              </h1>
-              <ul className="lg:w-2/3 mx-auto leading-relaxed text-base text-start">
-                <li className="list-disc">
-                  Uma mistura diversificada de profissionais criativos,
-                  desenvolvedores de software e entusiastas da música.
-                </li>
-                <li className="list-disc">
-                  Comprometidos em fornecer uma experiência excepcional tanto
-                  para artistas quanto para proprietários de locais.
-                </li>
-              </ul>
-            </div>
-            <div className="flex flex-wrap -m-2">
-              <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
-                  <div className="flex-grow">
-                    <h2 className="text-gray-900 title-font font-medium">
-                      Marcelo Debarry
-                    </h2>
-                    <p className="text-gray-500">Tech Lead</p>
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
-                  <div className="flex-grow">
-                    <h2 className="text-gray-900 title-font font-medium">
-                      Murilo Rezende
-                    </h2>
-                    <p className="text-gray-500">Back-End</p>
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
-                  <div className="flex-grow">
-                    <h2 className="text-gray-900 title-font font-medium">
-                      Gustavo Henrique
-                    </h2>
-                    <p className="text-gray-500">Front-End</p>
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
-                  <div className="flex-grow">
-                    <h2 className="text-gray-900 title-font font-medium">
-                      Davi Vital
-                    </h2>
-                    <p className="text-gray-500">Figma</p>
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
-                  <div className="flex-grow">
-                    <h2 className="text-gray-900 title-font font-medium">
-                      Isaac
-                    </h2>
-                    <p className="text-gray-500">Banco de Dados</p>
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                  <UserCircle weight="duotone" className="w-16 h-16 mr-4" />
-                  <div className="flex-grow">
-                    <h2 className="text-gray-900 title-font font-medium">
-                      Arthur Botelho
-                    </h2>
-                    <p className="text-gray-500">Designer</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div className="container px-5 py-24 mx-auto">
+    <div className="flex flex-col text-center w-full mb-20">
+      <h1 className="sm:text-5xl text-4xl lg:text-balance font-semibold text-pretty mb-6 tracking-tight text-gray-900">
+        Quem Desenvolveu
+      </h1>
+      <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-600">
+        Este projeto foi idealizado, projetado e desenvolvido por um único profissional
+        comprometido com excelência técnica e paixão por música e tecnologia.
+      </p>
+    </div>
+    <div className="flex justify-center">
+      <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
+        <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+          <UserCircle weight="duotone" className="w-16 h-16 mr-4 text-[#18A0FB]" />
+          <div className="flex-grow">
+            <h2 className="text-gray-900 title-font font-medium">
+              André Nestor Celino
+            </h2>
+            <p className="text-gray-500">Full Stack Developer</p>
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         <div className="p-4">
           <div className="rounded-lg bg-[#18a0fb] p-6 text-white shadow-lg">
